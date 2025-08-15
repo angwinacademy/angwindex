@@ -18,6 +18,90 @@
             color: #333;
         }
 
+        /* Login Screen Styles */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .login-form input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        .login-form input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-form button {
+            width: 100%;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .login-form button:hover {
+            background: #5a67d8;
+        }
+
+        .login-error {
+            color: #e53e3e;
+            margin-top: 15px;
+            font-weight: 500;
+            display: none;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Dashboard Styles */
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -31,6 +115,7 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+            position: relative;
         }
 
         .header h1 {
@@ -38,6 +123,25 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 10px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #4a5568;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.5);
         }
 
         .stats {
@@ -133,10 +237,6 @@
             background: #f8fafc;
         }
 
-        .autocomplete-item:last-child {
-            border-bottom: none;
-        }
-
         .advanced-toggle {
             background: #667eea;
             color: white;
@@ -167,7 +267,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
-            margin-bottom: 20px;
         }
 
         .filter-group {
@@ -189,57 +288,6 @@
             transition: border-color 0.3s ease;
         }
 
-        .filter-group input:focus, .filter-group select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .view-controls {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            display: none;
-        }
-
-        .view-controls.show {
-            display: block;
-        }
-
-        .view-toggle {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .view-btn {
-            padding: 10px 20px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .view-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .date-filter {
-            display: flex;
-            gap: 15px;
-            align-items: end;
-        }
-
-        .date-filter .filter-group {
-            flex: 1;
-        }
-
         .sessions-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -248,38 +296,10 @@
             backdrop-filter: blur(10px);
         }
 
-        .student-profile {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-        }
-
-        .student-name-large {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .student-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 20px;
-        }
-
-        .student-stat {
+        .no-sessions {
             text-align: center;
-        }
-
-        .student-stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .student-stat-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            padding: 60px 20px;
+            color: #718096;
         }
 
         .session-card {
@@ -297,294 +317,7 @@
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
         }
 
-        .session-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .student-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        .session-status {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .status-attended {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-
-        .status-cancelled {
-            background: #fed7d7;
-            color: #742a2a;
-        }
-
-        .status-pending {
-            background: #feebc8;
-            color: #7c2d12;
-        }
-
-        .session-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .detail-item {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .detail-label {
-            font-size: 0.75rem;
-            color: #718096;
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .detail-value {
-            color: #2d3748;
-            font-weight: 500;
-        }
-
-        .notes-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .notes-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #4a5568;
-        }
-
-        .notes-content {
-            color: #2d3748;
-            line-height: 1.5;
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .no-sessions {
-            text-align: center;
-            padding: 60px 20px;
-            color: #718096;
-        }
-
-        .back-btn {
-            background: #718096;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .back-btn:hover {
-            background: #4a5568;
-        }
-
-        .calendar-view {
-            display: none;
-        }
-
-        .calendar-view.active {
-            display: block;
-        }
-
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 1px;
-            background: #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .calendar-header {
-            background: #667eea;
-            color: white;
-            padding: 15px 5px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .calendar-day {
-            background: white;
-            min-height: 120px;
-            padding: 8px;
-            position: relative;
-        }
-
-        .calendar-day-number {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #4a5568;
-        }
-
-        .calendar-session {
-            background: #667eea;
-            color: white;
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            margin-bottom: 2px;
-            cursor: pointer;
-        }
-
-        .calendar-session:hover {
-            background: #5a67d8;
-        }
-
-        .other-month {
-            opacity: 0.3;
-        }
-
-        /* Login Screen Styles */
-        .login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .login-header h1 {
-            color: #4a5568;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .login-header p {
-            color: #718096;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .login-form input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            transition: border-color 0.3s ease;
-        }
-
-        .login-form input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .login-form button {
-            width: 100%;
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .login-form button:hover {
-            background: #5a67d8;
-        }
-
-        .login-error {
-            color: #e53e3e;
-            margin-top: 15px;
-            font-weight: 500;
-            display: none;
-        }
-
-        .logout-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
         @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .filter-row {
-                grid-template-columns: 1fr;
-            }
-
-            .session-details {
-                grid-template-columns: 1fr;
-            }
-
-            .view-toggle {
-                flex-direction: column;
-            }
-
-            .date-filter {
-                flex-direction: column;
-            }
-
-            .calendar-grid {
-                font-size: 0.8rem;
-            }
-
-            .calendar-day {
-                min-height: 80px;
-            }
-
             .login-container {
                 padding: 30px 25px;
             }
@@ -598,6 +331,14 @@
                 right: 20px;
                 padding: 6px 12px;
                 font-size: 14px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -626,26 +367,26 @@
             <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
         </div>
 
-        <div class="stats" id="statsContainer">
+        <div class="stats">
             <div class="stat-card">
-                <div class="stat-number" id="totalSessions">0</div>
+                <div class="stat-number" id="totalSessions">4</div>
                 <div class="stat-label">Total Sessions</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="attendedSessions">0</div>
+                <div class="stat-number" id="attendedSessions">3</div>
                 <div class="stat-label">Attended</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="uniqueStudents">0</div>
+                <div class="stat-number" id="uniqueStudents">4</div>
                 <div class="stat-label">Students</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="uniqueTeachers">0</div>
+                <div class="stat-number" id="uniqueTeachers">4</div>
                 <div class="stat-label">Teachers</div>
             </div>
         </div>
 
-        <div class="search-section" id="searchSection">
+        <div class="search-section">
             <div class="student-search-container">
                 <label>🔍 Search for a Student</label>
                 <input type="text" id="studentSearchInput" class="student-search-input" placeholder="Start typing a student name...">
@@ -682,61 +423,12 @@
             </div>
         </div>
 
-        <div class="view-controls" id="viewControls">
-            <button id="backBtn" class="back-btn">← Back to Search</button>
-            <div class="view-toggle">
-                <button id="listViewBtn" class="view-btn active">📋 List View</button>
-                <button id="calendarViewBtn" class="view-btn">📅 Calendar View</button>
-            </div>
-            <div class="date-filter">
-                <div class="filter-group">
-                    <label>From Date</label>
-                    <input type="date" id="fromDate">
-                </div>
-                <div class="filter-group">
-                    <label>To Date</label>
-                    <input type="date" id="toDate">
-                </div>
-            </div>
-        </div>
-
         <div class="sessions-container">
-            <div id="studentProfile" style="display: none;">
-                <div class="student-profile">
-                    <div class="student-name-large" id="profileStudentName"></div>
-                    <div class="student-stats">
-                        <div class="student-stat">
-                            <div class="student-stat-number" id="studentTotalSessions">0</div>
-                            <div class="student-stat-label">Total Sessions</div>
-                        </div>
-                        <div class="student-stat">
-                            <div class="student-stat-number" id="studentAttendedSessions">0</div>
-                            <div class="student-stat-label">Attended</div>
-                        </div>
-                        <div class="student-stat">
-                            <div class="student-stat-number" id="studentLastSession">N/A</div>
-                            <div class="student-stat-label">Last Session</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="listView" class="list-view">
-                <h2 style="margin-bottom: 20px; color: #4a5568;" id="sessionsTitle">📋 All Sessions</h2>
-                <div id="sessionsContainer">
-                    <div class="no-sessions">
-                        <h3>Search for a student</h3>
-                        <p>Type in a student's name above to view their session history</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="calendarView" class="calendar-view">
-                <h2 style="margin-bottom: 20px; color: #4a5568;">📅 Calendar View</h2>
-                <div id="calendarContainer">
-                    <div class="calendar-grid" id="calendarGrid">
-                        <!-- Calendar will be generated here -->
-                    </div>
+            <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
+            <div id="sessionsContainer">
+                <div class="no-sessions">
+                    <h3>Search for a student</h3>
+                    <p>Type in a student's name above to view their session history</p>
                 </div>
             </div>
         </div>
@@ -744,31 +436,79 @@
 
     <script>
         // Authentication
-        const DASHBOARD_PASSWORD = "1234"; // Change this to your desired password
+        const DASHBOARD_PASSWORD = "1234";
         let isAuthenticated = false;
+        let sessionsData = [];
 
-        // Check if user is already logged in (session storage)
+        // Sample data
+        const sampleData = [
+            {
+                student: "Elise Wharton",
+                teacher: "Brabham-Johnson, Tabatha",
+                serviceName: "Tutoring",
+                status: "Attended",
+                fromTime: "4:00:00 PM",
+                toTime: "5:00:00 PM",
+                date: "8/13/2025",
+                sharedNotes1: "Great progress this session!",
+                sharedNotes2: "Homework: Practice problems 1-15"
+            },
+            {
+                student: "Marcus Johnson",
+                teacher: "Smith, Jennifer", 
+                serviceName: "Tutoring",
+                status: "Attended",
+                fromTime: "3:00:00 PM",
+                toTime: "4:00:00 PM",
+                date: "8/14/2025",
+                sharedNotes1: "Completed all assignments perfectly"
+            },
+            {
+                student: "Sarah Chen",
+                teacher: "Williams, Michael",
+                serviceName: "Tutoring", 
+                status: "Cancelled",
+                fromTime: "2:00:00 PM",
+                toTime: "3:00:00 PM",
+                date: "8/15/2025",
+                sharedNotes1: "Making steady progress"
+            },
+            {
+                student: "David Rodriguez",
+                teacher: "Brown, Lisa",
+                serviceName: "Test Prep",
+                status: "Attended", 
+                fromTime: "5:00:00 PM",
+                toTime: "6:00:00 PM",
+                date: "8/12/2025",
+                sharedNotes1: "Good session today"
+            }
+        ];
+
+        // Initialize when page loads
         window.addEventListener('load', function() {
+            // Check if already authenticated
             const savedAuth = sessionStorage.getItem('tutoring_auth');
             if (savedAuth === 'authenticated') {
                 showDashboard();
             } else {
                 showLogin();
             }
-            
-            // Add enter key listener for password input
+
+            // Set up event listeners
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
             document.getElementById('passwordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     attemptLogin();
                 }
             });
-            
-            // Add click listener for login button
-            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
-            
+
             // Auto-focus password input
             setTimeout(() => {
-                document.getElementById('passwordInput').focus();
+                const passwordInput = document.getElementById('passwordInput');
+                if (passwordInput) {
+                    passwordInput.focus();
+                }
             }, 100);
         });
 
@@ -777,19 +517,17 @@
             const errorDiv = document.getElementById('loginError');
             
             if (password === DASHBOARD_PASSWORD) {
-                // Successful login
                 sessionStorage.setItem('tutoring_auth', 'authenticated');
                 isAuthenticated = true;
                 showDashboard();
                 errorDiv.style.display = 'none';
             } else {
-                // Failed login
                 errorDiv.textContent = 'Incorrect password. Please try again.';
                 errorDiv.style.display = 'block';
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
                 
-                // Shake animation for error
+                // Shake animation
                 const loginContainer = document.querySelector('.login-container');
                 loginContainer.style.animation = 'shake 0.5s';
                 setTimeout(() => {
@@ -802,10 +540,7 @@
             sessionStorage.removeItem('tutoring_auth');
             isAuthenticated = false;
             showLogin();
-            // Reset form
             document.getElementById('passwordInput').value = '';
-            currentStudent = null;
-            backToSearch();
         }
 
         function showLogin() {
@@ -818,156 +553,23 @@
             document.getElementById('mainDashboard').style.display = 'block';
             isAuthenticated = true;
             
-            // Initialize dashboard if not already done
-            if (sessionsData.length === 0) {
-                initializeDashboard();
-            }
+            // Initialize dashboard
+            sessionsData = sampleData;
+            setupDashboard();
         }
 
-        // Add shake animation CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px); }
-                75% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Dashboard functionality (only runs after authentication)
-        let sessionsData = [];
-        let filteredData = [];
-        let currentStudent = null;
-        let currentView = 'list';
-
-        function initializeDashboard() {
-        const sampleData = [
-            {
-                student: "Elise Wharton",
-                teacher: "Brabham-Johnson, Tabatha",
-                internalNotes1: "Student struggling with algebra concepts",
-                internalNotes2: "Needs extra practice with quadratic equations",
-                sharedNotes1: "Great progress this session!",
-                sharedNotes2: "Homework: Practice problems 1-15",
-                serviceName: "Tutoring",
-                status: "Attended",
-                fromTime: "4:00:00 PM",
-                toTime: "5:00:00 PM",
-                date: "8/13/2025",
-                description: "",
-                participantDescription: "",
-                lessonFlag: "",
-                participantIdEvent: "81289222",
-                participantsId: "99644379",
-                dateTime: "2025-08-13 20:00:00",
-                completedAt: "8/13/2025 20:00:00",
-                employeeId: "82229222"
-            },
-            {
-                student: "Elise Wharton",
-                teacher: "Brabham-Johnson, Tabatha",
-                internalNotes1: "Better understanding of concepts",
-                internalNotes2: "Ready for more advanced problems",
-                sharedNotes1: "Excellent work today",
-                sharedNotes2: "Continue with chapter 5",
-                serviceName: "Tutoring",
-                status: "Attended",
-                fromTime: "4:00:00 PM",
-                toTime: "5:00:00 PM",
-                date: "8/6/2025",
-                description: "",
-                participantDescription: "",
-                lessonFlag: "",
-                participantIdEvent: "81289223",
-                participantsId: "99644379",
-                dateTime: "2025-08-06 20:00:00",
-                completedAt: "8/6/2025 20:00:00",
-                employeeId: "82229222"
-            },
-            {
-                student: "Marcus Johnson",
-                teacher: "Smith, Jennifer",
-                internalNotes1: "Excellent student, very motivated",
-                internalNotes2: "Advanced level, needs challenging problems",
-                sharedNotes1: "Completed all assignments perfectly",
-                sharedNotes2: "Ready for next chapter",
-                serviceName: "Tutoring",
-                status: "Attended",
-                fromTime: "3:00:00 PM",
-                toTime: "4:00:00 PM",
-                date: "8/14/2025",
-                description: "",
-                participantDescription: "",
-                lessonFlag: "",
-                participantIdEvent: "81289224",
-                participantsId: "99644380",
-                dateTime: "2025-08-14 19:00:00",
-                completedAt: "8/14/2025 19:00:00",
-                employeeId: "82229223"
-            },
-            {
-                student: "Sarah Chen",
-                teacher: "Williams, Michael",
-                internalNotes1: "Needs confidence building",
-                internalNotes2: "Math anxiety issues",
-                sharedNotes1: "Making steady progress",
-                sharedNotes2: "Practice confidence-building exercises",
-                serviceName: "Tutoring",
-                status: "Cancelled",
-                fromTime: "2:00:00 PM",
-                toTime: "3:00:00 PM",
-                date: "8/15/2025",
-                description: "",
-                participantDescription: "",
-                lessonFlag: "",
-                participantIdEvent: "81289225",
-                participantsId: "99644381",
-                dateTime: "2025-08-15 18:00:00",
-                completedAt: "",
-                employeeId: "82229224"
-            },
-            {
-                student: "David Rodriguez",
-                teacher: "Brown, Lisa",
-                internalNotes1: "Strong in concepts, weak in application",
-                internalNotes2: "Needs more word problem practice",
-                sharedNotes1: "Good session today",
-                sharedNotes2: "Focus on application problems next time",
-                serviceName: "Test Prep",
-                status: "Attended",
-                fromTime: "5:00:00 PM",
-                toTime: "6:00:00 PM",
-                date: "8/12/2025",
-                description: "",
-                participantDescription: "",
-                lessonFlag: "",
-                participantIdEvent: "81289226",
-                participantsId: "99644382",
-                dateTime: "2025-08-12 21:00:00",
-                completedAt: "8/12/2025 21:00:00",
-                employeeId: "82229225"
-            }
-        ];
-
-            // Initialize with sample data
-            sessionsData = sampleData;
-            filteredData = [];
-            populateFilters();
-            updateStats();
-            displaySessions();
-
-            // Event listeners
-            document.getElementById('studentSearchInput').addEventListener('input', handleStudentSearch);
-            document.getElementById('advancedToggle').addEventListener('click', toggleAdvancedFilters);
-            document.getElementById('backBtn').addEventListener('click', backToSearch);
-            document.getElementById('listViewBtn').addEventListener('click', () => switchView('list'));
-            document.getElementById('calendarViewBtn').addEventListener('click', () => switchView('calendar'));
-            document.getElementById('fromDate').addEventListener('change', filterStudentSessions);
-            document.getElementById('toDate').addEventListener('change', filterStudentSessions);
-            
-            // Add logout button listener
+        function setupDashboard() {
+            // Set up logout button
             document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            // Set up search functionality  
+            document.getElementById('studentSearchInput').addEventListener('input', handleStudentSearch);
+            
+            // Set up advanced toggle
+            document.getElementById('advancedToggle').addEventListener('click', function() {
+                const filters = document.getElementById('advancedFilters');
+                filters.classList.toggle('show');
+            });
         }
 
         function handleStudentSearch() {
@@ -997,135 +599,57 @@
         function selectStudent(studentName) {
             document.getElementById('studentSearchInput').value = studentName;
             document.getElementById('autocompleteDropdown').style.display = 'none';
-            currentStudent = studentName;
-            showStudentProfile();
+            
+            // Show student sessions
+            const studentSessions = sessionsData.filter(s => s.student === studentName);
+            displayStudentSessions(studentName, studentSessions);
         }
 
-        function showStudentProfile() {
-            const studentSessions = sessionsData.filter(s => s.student === currentStudent);
+        function displayStudentSessions(studentName, sessions) {
+            const container = document.getElementById('sessionsContainer');
             
-            // Show student profile and controls
-            document.getElementById('studentProfile').style.display = 'block';
-            document.getElementById('viewControls').classList.add('show');
-            document.getElementById('searchSection').style.display = 'none';
-            
-            // Update profile info
-            document.getElementById('profileStudentName').textContent = currentStudent;
-            document.getElementById('studentTotalSessions').textContent = studentSessions.length;
-            document.getElementById('studentAttendedSessions').textContent = 
-                studentSessions.filter(s => s.status === 'Attended').length;
-            
-            // Get last session date
-            const lastSession = studentSessions.reduce((latest, session) => {
-                const sessionDate = new Date(session.date);
-                const latestDate = new Date(latest.date);
-                return sessionDate > latestDate ? session : latest;
-            }, studentSessions[0]);
-            
-            if (lastSession) {
-                document.getElementById('studentLastSession').textContent = lastSession.date;
+            if (sessions.length === 0) {
+                container.innerHTML = '<div class="no-sessions"><h3>No sessions found</h3></div>';
+                return;
             }
 
-            // Set title and display sessions
-            document.getElementById('sessionsTitle').textContent = `📋 ${currentStudent}'s Session History`;
-            filteredData = studentSessions.sort((a, b) => new Date(b.date) - new Date(a.date));
-            displaySessions();
-            
-            // Switch to list view by default
-            switchView('list');
+            container.innerHTML = `
+                <h3 style="margin-bottom: 20px; color: #4a5568;">Sessions for ${studentName}</h3>
+                ${sessions.map(session => `
+                    <div class="session-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <strong style="font-size: 1.1rem;">${session.teacher}</strong>
+                            <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; background: ${session.status === 'Attended' ? '#c6f6d5; color: #22543d' : session.status === 'Cancelled' ? '#fed7d7; color: #742a2a' : '#feebc8; color: #7c2d12'};">
+                                ${session.status}
+                            </span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                            <div>
+                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Date</div>
+                                <div style="color: #2d3748; font-weight: 500;">${session.date}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Time</div>
+                                <div style="color: #2d3748; font-weight: 500;">${session.fromTime} - ${session.toTime}</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Service</div>
+                                <div style="color: #2d3748; font-weight: 500;">${session.serviceName}</div>
+                            </div>
+                        </div>
+                        ${session.sharedNotes1 || session.sharedNotes2 ? `
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">📝 Session Notes</div>
+                                <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                    ${session.sharedNotes1 ? `<p>${session.sharedNotes1}</p>` : ''}
+                                    ${session.sharedNotes2 ? `<p>${session.sharedNotes2}</p>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `).join('')}
+            `;
         }
-
-        function backToSearch() {
-            currentStudent = null;
-            document.getElementById('studentProfile').style.display = 'none';
-            document.getElementById('viewControls').classList.remove('show');
-            document.getElementById('searchSection').style.display = 'block';
-            document.getElementById('studentSearchInput').value = '';
-            document.getElementById('sessionsTitle').textContent = '📋 All Sessions';
-            filteredData = [];
-            displaySessions();
-        }
-
-        function switchView(view) {
-            currentView = view;
-            
-            // Update button states
-            document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
-            document.getElementById('calendarViewBtn').classList.toggle('active', view === 'calendar');
-            
-            // Show/hide views
-            document.getElementById('listView').classList.toggle('active', view === 'list');
-            document.getElementById('calendarView').classList.toggle('active', view === 'calendar');
-            
-            if (view === 'calendar') {
-                generateCalendar();
-            }
-        }
-
-        function generateCalendar() {
-            const calendarGrid = document.getElementById('calendarGrid');
-            const currentDate = new Date();
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            // Clear existing calendar
-            calendarGrid.innerHTML = '';
-            
-            // Add headers
-            const headers = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            headers.forEach(header => {
-                const headerDiv = document.createElement('div');
-                headerDiv.className = 'calendar-header';
-                headerDiv.textContent = header;
-                calendarGrid.appendChild(headerDiv);
-            });
-            
-            // Get first day of month and number of days
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const daysInPrevMonth = new Date(year, month, 0).getDate();
-            
-            // Add previous month days
-            for (let i = firstDay - 1; i >= 0; i--) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'calendar-day other-month';
-                dayDiv.innerHTML = `<div class="calendar-day-number">${daysInPrevMonth - i}</div>`;
-                calendarGrid.appendChild(dayDiv);
-            }
-            
-            // Add current month days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'calendar-day';
-                
-                const dayNumber = document.createElement('div');
-                dayNumber.className = 'calendar-day-number';
-                dayNumber.textContent = day;
-                dayDiv.appendChild(dayNumber);
-                
-                // Add sessions for this day
-                const dayDate = `${month + 1}/${day}/${year}`;
-                const daySessions = filteredData.filter(session => {
-                    const sessionDate = new Date(session.date);
-                    const compareDate = new Date(year, month, day);
-                    return sessionDate.toDateString() === compareDate.toDateString();
-                });
-                
-                daySessions.forEach(session => {
-                    const sessionDiv = document.createElement('div');
-                    sessionDiv.className = 'calendar-session';
-                    sessionDiv.textContent = `${session.fromTime} - ${session.teacher.split(',')[0]}`;
-                    sessionDiv.onclick = () => showSessionDetails(session);
-                    dayDiv.appendChild(sessionDiv);
-                });
-                
-                calendarGrid.appendChild(dayDiv);
-            }
-            
-            // Add next month days to fill the grid
-            const totalCells = calendarGrid.children.length;
-            const remainingCells = 42 - totalCells; // 6 rows * 7 days
-            for (let day = 1; day <= remainingCells; day++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.className = 'calendar-day other-month';
-                dayDiv.innerHTML =
+    </script>
+</body>
+</html>
