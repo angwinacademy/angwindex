@@ -612,7 +612,7 @@
             </div>
             <div class="login-form">
                 <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="current-password">
-                <button id="loginBtn" onclick="attemptLogin()">Access Dashboard</button>
+                <button id="loginBtn">Access Dashboard</button>
                 <div id="loginError" class="login-error"></div>
             </div>
         </div>
@@ -623,7 +623,7 @@
         <div class="header">
             <h1>📚 Tutoring Academy Dashboard</h1>
             <p>Search for students and manage tutoring sessions</p>
-            <button id="logoutBtn" class="logout-btn" onclick="logout()">🚪 Logout</button>
+            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
         </div>
 
         <div class="stats" id="statsContainer">
@@ -762,6 +762,9 @@
                     attemptLogin();
                 }
             });
+            
+            // Add click listener for login button
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
             
             // Auto-focus password input
             setTimeout(() => {
@@ -962,6 +965,9 @@
             document.getElementById('calendarViewBtn').addEventListener('click', () => switchView('calendar'));
             document.getElementById('fromDate').addEventListener('change', filterStudentSessions);
             document.getElementById('toDate').addEventListener('change', filterStudentSessions);
+            
+            // Add logout button listener
+            document.getElementById('logoutBtn').addEventListener('click', logout);
         }
 
         function handleStudentSearch() {
