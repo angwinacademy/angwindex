@@ -439,8 +439,14 @@
         const DASHBOARD_PASSWORD = "1234";
         let isAuthenticated = false;
         let sessionsData = [];
+        let isLoading = false;
 
-        // Sample data
+        // Google Sheets Configuration
+        const SHEET_ID = '1SEKrq9CesJqTDmTS5KgTi6VVDuaL7109aFIm4UGFL5A';
+        const SHEET_NAME = 'Main';
+        const API_KEY = 'AIzaSyBpvDOr8cJfpQjE7RqKzA7tSqU6B1Zq9Xw'; // Public API key for demo
+        
+        // Sample data (fallback)
         const sampleData = [
             {
                 student: "Elise Wharton",
@@ -553,9 +559,128 @@
             document.getElementById('mainDashboard').style.display = 'block';
             isAuthenticated = true;
             
-            // Initialize dashboard
-            sessionsData = sampleData;
-            setupDashboard();
+            // Load data from Google Sheets
+            loadGoogleSheetsData();
+        }
+
+        async function loadGoogleSheetsData() {
+            try {
+                // Show loading state
+                updateLoadingState(true);
+                
+                // Construct the Google Sheets API URL
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+                
+                console.log('Fetching data from Google Sheets...');
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Raw data from Google Sheets:', data);
+                
+                if (data.values && data.values.length > 1) {
+                    // Process the data (skip header row)
+                    const rows = data.values.slice(1);
+                    sessionsData = rows.map(row => ({
+                        student: row[0] || '',
+                        teacher: row[1] || '',
+                        internalNotes1: row[2] || '',
+                        internalNotes2: row[3] || '',
+                        sharedNotes1: row[4] || '',
+                        sharedNotes2: row[5] || '',
+                        serviceName: row[6] || '',
+                        status: row[7] || '',
+                        fromTime: row[8] || '',
+                        toTime: row[9] || '',
+                        date: row[10] || '',
+                        description: row[11] || '',
+                        participantDescription: row[12] || '',
+                        lessonFlag: row[13] || '',
+                        participantIdEvent: row[14] || '',
+                        participantsId: row[15] || '',
+                        dateTime: row[16] || '',
+                        completedAt: row[17] || '',
+                        employeeId: row[18] || ''
+                    }));
+                    
+                    console.log(`Loaded ${sessionsData.length} sessions from Google Sheets`);
+                    updateStats();
+                    setupDashboard();
+                } else {
+                    throw new Error('No data found in the sheet');
+                }
+                
+            } catch (error) {
+                console.error('Error loading Google Sheets data:', error);
+                
+                // Fall back to sample data
+                console.log('Using sample data as fallback');
+                sessionsData = sampleData;
+                updateStats();
+                setupDashboard();
+                
+                // Show user-friendly error message
+                showErrorMessage('Connected to sample data. Check your internet connection and sheet permissions.');
+                
+            } finally {
+                updateLoadingState(false);
+            }
+        }
+
+        function updateLoadingState(loading) {
+            isLoading = loading;
+            const container = document.getElementById('sessionsContainer');
+            
+            if (loading) {
+                container.innerHTML = `
+                    <div class="no-sessions">
+                        <h3>🔄 Loading your data...</h3>
+                        <p>Connecting to Google Sheets</p>
+                    </div>
+                `;
+            }
+        }
+
+        function showErrorMessage(message) {
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #fed7d7;
+                color: #742a2a;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #feb2b2;
+                max-width: 300px;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            `;
+            notification.innerHTML = `
+                <strong>⚠️ Connection Notice</strong><br>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 5000);
+        }
+
+        function updateStats() {
+            document.getElementById('totalSessions').textContent = sessionsData.length;
+            document.getElementById('attendedSessions').textContent = 
+                sessionsData.filter(s => s.status === 'Attended').length;
+            document.getElementById('uniqueStudents').textContent = 
+                new Set(sessionsData.map(s => s.student).filter(s => s)).size;
+            document.getElementById('uniqueTeachers').textContent = 
+                new Set(sessionsData.map(s => s.teacher).filter(t => t)).size;
         }
 
         function setupDashboard() {
