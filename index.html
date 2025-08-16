@@ -552,10 +552,10 @@
             }
         ];
 
-        // Debug mode toggle (press Ctrl+Shift+D)
+        // Debug mode toggle (press Ctrl+Shift+D on Windows/Linux or Cmd+Shift+D on Mac)
         let debugMode = false;
         document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
                 debugMode = !debugMode;
                 document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
                 updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
