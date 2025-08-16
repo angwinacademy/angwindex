@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoring Academy Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Connection Status Indicator -->
+    <div id="connectionStatus" class="connection-status loading">🔄 Connecting...</div>
+    
+    <!-- Debug Toggle Button -->
+    <button id="debugToggle" class="debug-toggle" onclick="toggleDebugMode()">🐛 Debug</button>
+    
+    <!-- Debug Info (hidden by default) -->
+    <div id="debugInfo" class="debug-info"></div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>📚 Tutoring Academy</h1>
+                <p>Enter password to access dashboard</p>
+            </div>
+            <div class="login-form">
+                <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="current-password">
+                <button id="loginBtn">Access Dashboard</button>
+                <div id="loginError" class="login-error"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden by default) -->
+    <div id="mainDashboard" class="container" style="display: none;">
+        <div class="header">
+            <h1>📚 Tutoring Academy Dashboard</h1>
+            <p>Search for students and manage tutoring sessions</p>
+            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="totalSessions">-</div>
+                <div class="stat-label">Total Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="attendedSessions">-</div>
+                <div class="stat-label">Attended</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueStudents">-</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueTeachers">-</div>
+                <div class="stat-label">Teachers</div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <div class="student-search-container">
+                <label>🔍 Search for a Student</label>
+                <input type="text" id="studentSearchInput" class="student-search-input" placeholder="Start typing a student name...">
+                <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
+            </div>
+            
+            <button id="advancedToggle" class="advanced-toggle">⚙️ Advanced Search</button>
+            
+            <div id="advancedFilters" class="advanced-filters">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Filter by Teacher</label>
+                        <select id="teacherFilter">
+                            <option value="">All Teachers</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="statusFilter">
+                            <option value="">All Statuses</option>
+                            <option value="Attended">Attended</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Service Type</label>
+                        <select id="serviceFilter">
+                            <option value="">All Services</option>
+                            <option value="Tutoring" selected>Tutoring</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sessions-container">
+            <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
+            <div id="sessionsContainer">
+                <div class="no-sessions">
+                    <h3>Search for a student</h3>
+                    <p>Type in a student's name above to view their session history</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/debug.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
