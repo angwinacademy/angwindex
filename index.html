@@ -348,15 +348,38 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             color: white;
-            padding: 10px;
+            padding: 15px;
             border-radius: 8px;
             font-family: monospace;
             font-size: 12px;
-            max-width: 300px;
+            max-width: 400px;
+            max-height: 300px;
+            overflow-y: auto;
             z-index: 1000;
             display: none;
+            border: 2px solid #667eea;
+        }
+
+        .debug-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #4a5568;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .debug-toggle:hover {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
@@ -396,6 +419,9 @@
 <body>
     <!-- Connection Status Indicator -->
     <div id="connectionStatus" class="connection-status loading">🔄 Connecting...</div>
+    
+    <!-- Debug Toggle Button -->
+    <button id="debugToggle" class="debug-toggle" onclick="toggleDebugMode()">🐛 Debug</button>
     
     <!-- Debug Info (hidden by default) -->
     <div id="debugInfo" class="debug-info"></div>
@@ -552,13 +578,25 @@
             }
         ];
 
+        function toggleDebugMode() {
+            debugMode = !debugMode;
+            document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
+            const toggleBtn = document.getElementById('debugToggle');
+            toggleBtn.textContent = debugMode ? '🐛 Hide Debug' : '🐛 Debug';
+            updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
+            
+            if (debugMode) {
+                // Show current status when debug is enabled
+                updateDebugInfo(`Current data source: ${sessionsData === sampleData ? 'Sample Data' : 'Google Sheets'}`);
+                updateDebugInfo(`Total sessions loaded: ${sessionsData.length}`);
+            }
+        }
+
         // Debug mode toggle (press Ctrl+Shift+D on Windows/Linux or Cmd+Shift+D on Mac)
         let debugMode = false;
         document.addEventListener('keydown', function(e) {
             if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
-                debugMode = !debugMode;
-                document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
-                updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
+                toggleDebugMode();
             }
         });
 
@@ -759,7 +797,7 @@
                 if (debugMode) {
                     showErrorMessage(`Google Sheets Error: ${error.message}. Using sample data. Check debug panel for details.`);
                 } else {
-                    showErrorMessage('Connected to sample data. Press Ctrl+Shift+D for debug info.');
+                    showErrorMessage('Connected to sample data. Press Cmd+Shift+D (Mac) or Ctrl+Shift+D (PC) for debug info.');
                 }
                 
             } finally {
