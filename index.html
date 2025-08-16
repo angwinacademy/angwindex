@@ -378,6 +378,245 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Calendar View Styles */
+        .view-toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .view-toggle {
+            display: flex;
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .view-toggle button {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #718096;
+        }
+
+        .view-toggle button.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        }
+
+        .view-toggle button:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .calendar-view {
+            display: none;
+        }
+
+        .calendar-view.show {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .calendar-nav button {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #4a5568;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background: #e2e8f0;
+        }
+
+        .calendar-month-year {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4a5568;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .calendar-header-cell {
+            background: #f8fafc;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .calendar-cell {
+            background: white;
+            min-height: 100px;
+            padding: 8px;
+            position: relative;
+            border: none;
+        }
+
+        .calendar-cell.other-month {
+            background: #f8fafc;
+            color: #a0aec0;
+        }
+
+        .calendar-cell.today {
+            background: #f0f9ff;
+            border: 2px solid #667eea;
+        }
+
+        .calendar-date {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #4a5568;
+        }
+
+        .calendar-cell.other-month .calendar-date {
+            color: #a0aec0;
+        }
+
+        .calendar-session {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .calendar-session:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .calendar-session.cancelled {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .calendar-session.pending {
+            background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
+        }
+
+        .session-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            max-width: 250px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .session-tooltip.show {
+            opacity: 1;
+        }
+
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            color: #4a5568;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-color.attended {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .legend-color.cancelled {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .legend-color.pending {
+            background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
+        }
+
+        @media (max-width: 768px) {
+            .view-toggle-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .calendar-cell {
+                min-height: 80px;
+                padding: 4px;
+            }
+
+            .calendar-session {
+                font-size: 0.7rem;
+                padding: 1px 4px;
+            }
+
+            .calendar-legend {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
         .no-sessions {
             text-align: center;
             padding: 60px 20px;
@@ -623,6 +862,10 @@
         let sessionsData = [];
         let isLoading = false;
         let searchSectionVisible = false;
+        let currentView = 'list'; // 'list' or 'calendar'
+        let currentStudentSessions = [];
+        let currentStudentName = '';
+        let currentCalendarDate = new Date();
 
         // Google Sheets Configuration - UPDATED
         const SHEET_ID = '1SEKrq9CesJqTDmTS5KgTi6VVDuaL7109aFIm4UGFL5A';
@@ -1077,7 +1320,197 @@
             // Show student sessions
             const studentSessions = sessionsData.filter(s => s.student === studentName);
             updateDebugInfo(`Found ${studentSessions.length} sessions for ${studentName}`);
+            
+            // Store current data for view switching
+            currentStudentSessions = studentSessions;
+            currentStudentName = studentName;
+            
             displayStudentSessions(studentName, studentSessions);
+        }
+
+        // View switching functions
+        function switchView(view) {
+            currentView = view;
+            updateDebugInfo(`Switched to ${view} view`);
+            
+            // Update button states
+            document.querySelectorAll('.view-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchView('${view}')"]`).classList.add('active');
+            
+            // Show/hide appropriate views
+            const listView = document.getElementById('listView');
+            const calendarView = document.getElementById('calendarView');
+            
+            if (view === 'list') {
+                listView.style.display = 'block';
+                calendarView.classList.remove('show');
+            } else {
+                listView.style.display = 'none';
+                calendarView.classList.add('show');
+                renderCalendar();
+            }
+        }
+
+        function renderCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthYearDisplay = document.getElementById('monthYearDisplay');
+            
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            // Update month/year display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+            
+            // Clear existing content
+            calendarGrid.innerHTML = '';
+            
+            // Add day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const headerCell = document.createElement('div');
+                headerCell.className = 'calendar-header-cell';
+                headerCell.textContent = day;
+                calendarGrid.appendChild(headerCell);
+            });
+            
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+            
+            // Add empty cells for days before month starts
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const prevMonthDate = new Date(year, month, -firstDayOfWeek + i + 1);
+                const emptyCell = createCalendarCell(prevMonthDate, true);
+                calendarGrid.appendChild(emptyCell);
+            }
+            
+            // Add cells for each day of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const currentDate = new Date(year, month, day);
+                const cell = createCalendarCell(currentDate, false);
+                calendarGrid.appendChild(cell);
+            }
+            
+            // Fill remaining cells
+            const totalCells = calendarGrid.children.length - 7; // Subtract header row
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days
+            for (let i = 1; i <= remainingCells; i++) {
+                const nextMonthDate = new Date(year, month + 1, i);
+                const cell = createCalendarCell(nextMonthDate, true);
+                calendarGrid.appendChild(cell);
+            }
+        }
+
+        function createCalendarCell(date, isOtherMonth) {
+            const cell = document.createElement('div');
+            cell.className = 'calendar-cell';
+            if (isOtherMonth) cell.classList.add('other-month');
+            
+            // Check if this is today
+            const today = new Date();
+            if (date.toDateString() === today.toDateString()) {
+                cell.classList.add('today');
+            }
+            
+            // Add date number
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'calendar-date';
+            dateDiv.textContent = date.getDate();
+            cell.appendChild(dateDiv);
+            
+            // Find sessions for this date
+            const dateString = formatDateForComparison(date);
+            const sessionsForDate = currentStudentSessions.filter(session => {
+                return formatDateForComparison(new Date(session.date)) === dateString;
+            });
+            
+            // Add sessions to the cell
+            sessionsForDate.forEach(session => {
+                const sessionDiv = document.createElement('div');
+                sessionDiv.className = 'calendar-session';
+                if (session.status.toLowerCase() === 'cancelled') {
+                    sessionDiv.classList.add('cancelled');
+                } else if (session.status.toLowerCase() === 'pending') {
+                    sessionDiv.classList.add('pending');
+                }
+                
+                sessionDiv.textContent = `${session.fromTime} ${session.teacher.split(',')[0]}`;
+                sessionDiv.onclick = (e) => {
+                    e.stopPropagation();
+                    showSessionDetails(session);
+                };
+                
+                // Add hover tooltip
+                sessionDiv.onmouseenter = (e) => showSessionTooltip(e, session);
+                sessionDiv.onmouseleave = hideSessionTooltip;
+                
+                cell.appendChild(sessionDiv);
+            });
+            
+            return cell;
+        }
+
+        function formatDateForComparison(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function showSessionTooltip(event, session) {
+            const tooltip = document.getElementById('sessionTooltip') || createTooltip();
+            
+            tooltip.innerHTML = `
+                <div><strong>${session.teacher}</strong></div>
+                <div>${session.fromTime} - ${session.toTime}</div>
+                <div>Status: ${session.status}</div>
+                ${session.sharedNotes1 ? `<div style="margin-top: 5px; font-size: 0.8rem;">${session.sharedNotes1}</div>` : ''}
+            `;
+            
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = rect.left + 'px';
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function createTooltip() {
+            const tooltip = document.createElement('div');
+            tooltip.id = 'sessionTooltip';
+            tooltip.className = 'session-tooltip';
+            document.body.appendChild(tooltip);
+            return tooltip;
+        }
+
+        function hideSessionTooltip() {
+            const tooltip = document.getElementById('sessionTooltip');
+            if (tooltip) {
+                tooltip.classList.remove('show');
+            }
+        }
+
+        function showSessionDetails(session) {
+            alert(`Session Details:\n\nTeacher: ${session.teacher}\nTime: ${session.fromTime} - ${session.toTime}\nDate: ${session.date}\nStatus: ${session.status}\n\nShared Notes: ${session.sharedNotes1 || 'None'}\nInternal Notes: ${session.internalNotes1 || 'None'}`);
+        }
+
+        function navigateCalendar(direction) {
+            const currentMonth = currentCalendarDate.getMonth();
+            const currentYear = currentCalendarDate.getFullYear();
+            
+            if (direction === 'prev') {
+                currentCalendarDate = new Date(currentYear, currentMonth - 1, 1);
+            } else {
+                currentCalendarDate = new Date(currentYear, currentMonth + 1, 1);
+            }
+            
+            renderCalendar();
+        }
+
+        function goToToday() {
+            currentCalendarDate = new Date();
+            renderCalendar();
         }
 
         function displayDefaultMessage() {
@@ -1124,55 +1557,99 @@
             });
 
             container.innerHTML = `
-                <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions for ${studentName}</h2>
+                <div class="view-toggle-container">
+                    <h2 style="color: #4a5568; margin: 0;">📋 Sessions for ${studentName}</h2>
+                    <div class="view-toggle">
+                        <button class="active" onclick="switchView('list')">📋 List View</button>
+                        <button onclick="switchView('calendar')">📅 Calendar View</button>
+                    </div>
+                </div>
+                
                 <div style="margin-bottom: 20px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
                     <strong>Total Sessions:</strong> ${sessions.length} | 
                     <strong>Attended:</strong> ${sessions.filter(s => s.status === 'Attended').length} | 
                     <strong>Cancelled:</strong> ${sessions.filter(s => s.status === 'Cancelled').length}
                 </div>
-                ${sortedSessions.map((session, index) => `
-                    <div class="session-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <strong style="font-size: 1.1rem;">${session.teacher}</strong>
-                            <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; background: ${getStatusColor(session.status)};">
-                                ${session.status}
-                            </span>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px;">
-                            <div>
-                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Date</div>
-                                <div style="color: #2d3748; font-weight: 500;">${session.date}</div>
+
+                <!-- List View -->
+                <div id="listView">
+                    ${sortedSessions.map((session, index) => `
+                        <div class="session-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <strong style="font-size: 1.1rem;">${session.teacher}</strong>
+                                <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; background: ${getStatusColor(session.status)};">
+                                    ${session.status}
+                                </span>
                             </div>
-                            <div>
-                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Time</div>
-                                <div style="color: #2d3748; font-weight: 500;">${session.fromTime} - ${session.toTime}</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Service</div>
-                                <div style="color: #2d3748; font-weight: 500;">${session.serviceName || 'Tutoring'}</div>
-                            </div>
-                        </div>
-                        ${(session.sharedNotes1 || session.sharedNotes2) ? `
-                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
-                                <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">📝 Shared Notes</div>
-                                <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                                    ${session.sharedNotes1 ? `<p style="margin-bottom: ${session.sharedNotes2 ? '10px' : '0'};">${session.sharedNotes1}</p>` : ''}
-                                    ${session.sharedNotes2 ? `<p style="margin: 0;">${session.sharedNotes2}</p>` : ''}
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Date</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.date}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Time</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.fromTime} - ${session.toTime}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Service</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.serviceName || 'Tutoring'}</div>
                                 </div>
                             </div>
-                        ` : ''}
-                        ${(session.internalNotes1 || session.internalNotes2) ? `
-                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
-                                <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">🔒 Internal Notes</div>
-                                <div style="background: #fefefe; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; color: #4a5568;">
-                                    ${session.internalNotes1 ? `<p style="margin-bottom: ${session.internalNotes2 ? '10px' : '0'};">${session.internalNotes1}</p>` : ''}
-                                    ${session.internalNotes2 ? `<p style="margin: 0;">${session.internalNotes2}</p>` : ''}
+                            ${(session.sharedNotes1 || session.sharedNotes2) ? `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">📝 Shared Notes</div>
+                                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                        ${session.sharedNotes1 ? `<p style="margin-bottom: ${session.sharedNotes2 ? '10px' : '0'};">${session.sharedNotes1}</p>` : ''}
+                                        ${session.sharedNotes2 ? `<p style="margin: 0;">${session.sharedNotes2}</p>` : ''}
+                                    </div>
                                 </div>
-                            </div>
-                        ` : ''}
+                            ` : ''}
+                            ${(session.internalNotes1 || session.internalNotes2) ? `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">🔒 Internal Notes</div>
+                                    <div style="background: #fefefe; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; color: #4a5568;">
+                                        ${session.internalNotes1 ? `<p style="margin-bottom: ${session.internalNotes2 ? '10px' : '0'};">${session.internalNotes1}</p>` : ''}
+                                        ${session.internalNotes2 ? `<p style="margin: 0;">${session.internalNotes2}</p>` : ''}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Calendar View -->
+                <div id="calendarView" class="calendar-view">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button onclick="navigateCalendar('prev')">‹ Previous</button>
+                            <button onclick="goToToday()">Today</button>
+                            <button onclick="navigateCalendar('next')">Next ›</button>
+                        </div>
+                        <div id="monthYearDisplay" class="calendar-month-year"></div>
+                        <div></div> <!-- Spacer for flex layout -->
                     </div>
-                `).join('')}
+                    
+                    <div id="calendarGrid" class="calendar-grid"></div>
+                    
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color attended"></div>
+                            <span>Attended</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cancelled"></div>
+                            <span>Cancelled</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color pending"></div>
+                            <span>Pending</span>
+                        </div>
+                    </div>
+                </div>
             `;
+            
+            // Reset to list view by default
+            currentView = 'list';
         }
 
         function getStatusColor(status) {
