@@ -177,6 +177,41 @@
             font-weight: 500;
         }
 
+        /* Search Appointments Button */
+        .search-appointments-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .search-appointments-btn button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .search-appointments-btn button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-appointments-btn p {
+            margin-top: 15px;
+            color: #718096;
+            font-size: 16px;
+        }
+
         .search-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -184,6 +219,53 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+            display: none; /* Hidden by default */
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .search-section.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .search-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .search-section-header h3 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-search-btn {
+            background: #e2e8f0;
+            color: #4a5568;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .close-search-btn:hover {
+            background: #cbd5e0;
         }
 
         .student-search-container {
@@ -413,6 +495,12 @@
                 margin-bottom: 20px;
                 display: inline-block;
             }
+
+            .search-section-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
@@ -445,7 +533,7 @@
     <div id="mainDashboard" class="container" style="display: none;">
         <div class="header">
             <h1>📚 Tutoring Academy Dashboard</h1>
-            <p>Search for students and manage tutoring sessions</p>
+            <p>Manage tutoring sessions and student appointments</p>
             <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
         </div>
 
@@ -468,9 +556,21 @@
             </div>
         </div>
 
-        <div class="search-section">
+        <!-- Search Appointments Button -->
+        <div id="searchAppointmentsBtn" class="search-appointments-btn">
+            <button onclick="showSearchSection()">🔍 Search Appointments</button>
+            <p>Find specific student sessions and appointment history</p>
+        </div>
+
+        <!-- Search Section (Hidden by default) -->
+        <div id="searchSection" class="search-section">
+            <div class="search-section-header">
+                <h3>🔍 Search Student Appointments</h3>
+                <button id="closeSearchBtn" class="close-search-btn" onclick="hideSearchSection()">✕ Close</button>
+            </div>
+            
             <div class="student-search-container">
-                <label>🔍 Search for a Student</label>
+                <label>Search for a Student</label>
                 <input type="text" id="studentSearchInput" class="student-search-input" placeholder="Start typing a student name...">
                 <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
             </div>
@@ -509,8 +609,8 @@
             <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
             <div id="sessionsContainer">
                 <div class="no-sessions">
-                    <h3>Search for a student</h3>
-                    <p>Type in a student's name above to view their session history</p>
+                    <h3>Welcome to your dashboard</h3>
+                    <p>Use the "Search Appointments" button above to find specific student sessions</p>
                 </div>
             </div>
         </div>
@@ -522,6 +622,7 @@
         let isAuthenticated = false;
         let sessionsData = [];
         let isLoading = false;
+        let searchSectionVisible = false;
 
         // Google Sheets Configuration - UPDATED
         const SHEET_ID = '1SEKrq9CesJqTDmTS5KgTi6VVDuaL7109aFIm4UGFL5A';
@@ -631,6 +732,31 @@
                     statusDiv.style.opacity = '0.3';
                 }, 3000);
             }
+        }
+
+        // Show/Hide Search Section Functions
+        function showSearchSection() {
+            updateDebugInfo('Search section opened');
+            document.getElementById('searchAppointmentsBtn').style.display = 'none';
+            document.getElementById('searchSection').classList.add('show');
+            searchSectionVisible = true;
+            
+            // Focus on search input
+            setTimeout(() => {
+                document.getElementById('studentSearchInput').focus();
+            }, 100);
+        }
+
+        function hideSearchSection() {
+            updateDebugInfo('Search section closed');
+            document.getElementById('searchSection').classList.remove('show');
+            document.getElementById('searchAppointmentsBtn').style.display = 'block';
+            searchSectionVisible = false;
+            
+            // Clear search and reset to default view
+            document.getElementById('studentSearchInput').value = '';
+            document.getElementById('autocompleteDropdown').style.display = 'none';
+            displayDefaultMessage();
         }
 
         // Initialize when page loads
@@ -811,6 +937,7 @@
             
             if (loading) {
                 container.innerHTML = `
+                    <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
                     <div class="no-sessions">
                         <h3>🔄 Loading your data...</h3>
                         <p>Connecting to Google Sheets</p>
@@ -921,7 +1048,7 @@
             if (searchTerm.length < 1) {
                 dropdown.style.display = 'none';
                 // Reset to default state
-                displayDefaultMessage();
+                displaySearchMessage();
                 return;
             }
 
@@ -954,6 +1081,17 @@
         }
 
         function displayDefaultMessage() {
+            const container = document.getElementById('sessionsContainer');
+            container.innerHTML = `
+                <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
+                <div class="no-sessions">
+                    <h3>Welcome to your dashboard</h3>
+                    <p>Use the "Search Appointments" button above to find specific student sessions</p>
+                </div>
+            `;
+        }
+
+        function displaySearchMessage() {
             const container = document.getElementById('sessionsContainer');
             container.innerHTML = `
                 <h2 style="margin-bottom: 20px; color: #4a5568;">📋 Sessions</h2>
