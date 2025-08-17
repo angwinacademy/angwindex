@@ -912,8 +912,6 @@
     </style>
 </head>
 <body>
-    <!-- Login Screen -->
-
 
     <!-- Main Dashboard -->
     <div class="container" id="dashboard" style="display: none;">
@@ -1130,26 +1128,6 @@
         let currentDate = new Date();
         let isLoggedIn = false;
 
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Login form submitted');
-            login();
-        });
-
-        function login() {
-            console.log('Logging in...');
-            isLoggedIn = true;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            initializeDashboard();
-        }
-
-        function logout() {
-            isLoggedIn = false;
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('dashboard').style.display = 'none';
-        }
 
         function initializeDashboard() {
             updateStats();
@@ -1643,6 +1621,11 @@
         function capitalize(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
+
+        // Initialize the dashboard when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Dashboard is ready, user can click "Enter Dashboard" to access
+        });
     </script>
 </body>
 </html>
