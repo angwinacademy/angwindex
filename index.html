@@ -125,6 +125,49 @@
             margin-bottom: 10px;
         }
 
+        /* Header Buttons Container */
+        .header-buttons {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #4a5568;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .header-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .header-btn.scheduling {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .header-btn.scheduling:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+        }
+
         .logout-btn {
             position: absolute;
             top: 30px;
@@ -825,11 +868,17 @@
                 font-size: 2rem;
             }
 
-            .logout-btn {
-                top: 20px;
-                right: 20px;
+            .header-buttons {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 20px;
+                justify-content: center;
+            }
+
+            .header-btn {
+                font-size: 12px;
                 padding: 6px 12px;
-                font-size: 14px;
             }
 
             .container {
@@ -854,6 +903,31 @@
                 align-items: stretch;
             }
         }
+
+        /* Notification styles for scheduling button feedback */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #e53e3e;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -861,7 +935,7 @@
     <div id="connectionStatus" class="connection-status loading">🔄 Connecting...</div>
     
     <!-- Debug Toggle Button -->
-    <button id="debugToggle" class="debug-toggle" onclick="toggleDebugMode()">🐛 Debug</button>
+    <button id="debugToggle" class="debug-toggle" onclick="toggleDebugMode()">🛠 Debug</button>
     
     <!-- Debug Info (hidden by default) -->
     <div id="debugInfo" class="debug-info"></div>
@@ -886,7 +960,14 @@
         <div class="header">
             <h1>📚 Tutoring Academy Dashboard</h1>
             <p>Manage tutoring sessions and student appointments</p>
-            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+            
+            <!-- Header Buttons -->
+            <div class="header-buttons">
+                <a href="#" id="schedulingBtn" class="header-btn scheduling">
+                    📅 Scheduling Dashboard
+                </a>
+                <button id="logoutBtn" class="header-btn">🚪 Logout</button>
+            </div>
         </div>
 
         <div class="stats">
@@ -1034,17 +1115,72 @@
             }
         ];
 
+        // Scheduling Dashboard Configuration
+        const SCHEDULING_DASHBOARD_URL = "https://your-scheduling-repo-url.com"; // Replace with your actual scheduling dashboard URL
+        
+        function handleSchedulingClick() {
+            updateDebugInfo('Scheduling dashboard button clicked');
+            
+            // You can customize this behavior:
+            // Option 1: Open in same tab
+            // window.location.href = SCHEDULING_DASHBOARD_URL;
+            
+            // Option 2: Open in new tab (current implementation)
+            window.open(SCHEDULING_DASHBOARD_URL, '_blank');
+            
+            // Option 3: Show a notification if URL is not set
+            if (SCHEDULING_DASHBOARD_URL === "https://your-scheduling-repo-url.com") {
+                showNotification("Please configure the scheduling dashboard URL in the code", "error");
+                return;
+            }
+            
+            showNotification("Opening scheduling dashboard...", "success");
+        }
+
+        function showNotification(message, type = "success") {
+            // Remove existing notification if any
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                document.body.removeChild(existingNotification);
+            }
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 3000);
+        }
+
         function toggleDebugMode() {
             debugMode = !debugMode;
             document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
             const toggleBtn = document.getElementById('debugToggle');
-            toggleBtn.textContent = debugMode ? '🐛 Hide Debug' : '🐛 Debug';
+            toggleBtn.textContent = debugMode ? '🛠 Hide Debug' : '🛠 Debug';
             updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
             
             if (debugMode) {
                 // Show current status when debug is enabled
                 updateDebugInfo(`Current data source: ${sessionsData === sampleData ? 'Sample Data' : 'Google Sheets'}`);
                 updateDebugInfo(`Total sessions loaded: ${sessionsData.length}`);
+                updateDebugInfo(`Scheduling URL: ${SCHEDULING_DASHBOARD_URL}`);
             }
         }
 
@@ -1385,6 +1521,12 @@
             
             // Set up logout button
             document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            // Set up scheduling button
+            document.getElementById('schedulingBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                handleSchedulingClick();
+            });
             
             // Set up search functionality  
             const studentInput = document.getElementById('studentSearchInput');
