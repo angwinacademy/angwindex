@@ -964,7 +964,7 @@
             <!-- Header Buttons -->
             <div class="header-buttons">
                 <a href="#" id="schedulingBtn" class="header-btn scheduling">
-                    📅 Scheduling Dashboard
+                    📅 Scheduling
                 </a>
                 <button id="logoutBtn" class="header-btn">🚪 Logout</button>
             </div>
@@ -1116,7 +1116,7 @@
         ];
 
         // Scheduling Dashboard Configuration
-        const SCHEDULING_DASHBOARD_URL = "https://your-scheduling-repo-url.com"; // Replace with your actual scheduling dashboard URL
+        const SCHEDULING_DASHBOARD_URL = "https://angwinacademy.github.io/availability/"; // Replace with your actual scheduling dashboard URL
         
         function handleSchedulingClick() {
             updateDebugInfo('Scheduling dashboard button clicked');
@@ -1129,7 +1129,7 @@
             window.open(SCHEDULING_DASHBOARD_URL, '_blank');
             
             // Option 3: Show a notification if URL is not set
-            if (SCHEDULING_DASHBOARD_URL === "https://your-scheduling-repo-url.com") {
+            if (SCHEDULING_DASHBOARD_URL === "https://angwinacademy.github.io/availability/") {
                 showNotification("Please configure the scheduling dashboard URL in the code", "error");
                 return;
             }
