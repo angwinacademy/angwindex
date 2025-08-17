@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -129,6 +129,7 @@
             margin-bottom: 10px;
         }
 
+        /* Header Buttons Container */
         .header-buttons {
             position: absolute;
             top: 30px;
@@ -171,6 +172,25 @@
             box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
         }
 
+        .logout-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #4a5568;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.5);
+        }
+
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -209,6 +229,7 @@
             font-weight: 500;
         }
 
+        /* Search Appointments Button */
         .search-appointments-btn {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -237,6 +258,12 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         }
 
+        .search-appointments-btn p {
+            margin-top: 15px;
+            color: #718096;
+            font-size: 16px;
+        }
+
         .search-section {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
@@ -244,7 +271,7 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
-            display: none;
+            display: none; /* Hidden by default */
             animation: fadeIn 0.3s ease-in;
         }
 
@@ -408,6 +435,7 @@
             backdrop-filter: blur(10px);
         }
 
+        /* Calendar View Styles */
         .view-toggle-container {
             display: flex;
             justify-content: space-between;
@@ -440,6 +468,11 @@
             background: #667eea;
             color: white;
             box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
+        }
+
+        .view-toggle button:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
         }
 
         .calendar-view {
@@ -559,6 +592,61 @@
             background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
         }
 
+        .session-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            max-width: 250px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .session-tooltip.show {
+            opacity: 1;
+        }
+
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            color: #4a5568;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-color.attended {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .legend-color.cancelled {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+        }
+
+        .legend-color.pending {
+            background: linear-gradient(135deg, #d69e2e 0%, #b7791f 100%);
+        }
+
+        /* Session Detail Modal */
         .session-modal {
             position: fixed;
             top: 0;
@@ -646,6 +734,78 @@
             grid-template-columns: 1fr;
         }
 
+        .session-notes-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .session-notes-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+
+        .session-notes-content {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            min-height: 60px;
+        }
+
+        .session-notes-content p {
+            margin: 0 0 10px 0;
+        }
+
+        .session-notes-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .session-notes-empty {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .view-toggle-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .calendar-cell {
+                min-height: 80px;
+                padding: 4px;
+            }
+
+            .calendar-session {
+                font-size: 0.7rem;
+                padding: 1px 4px;
+            }
+
+            .calendar-legend {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .session-modal-content {
+                padding: 20px;
+                margin: 20px;
+                max-width: none;
+            }
+
+            .session-detail-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+
         .no-sessions {
             text-align: center;
             padding: 60px 20px;
@@ -674,220 +834,91 @@
             margin-bottom: 15px;
         }
 
-        .clickable-student {
-            cursor: pointer;
-            color: #667eea;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-weight: 500;
+        .session-card-grid.compact {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
 
-        .clickable-student:hover {
-            color: #5a67d8;
-            text-decoration: underline;
+        @media (max-width: 600px) {
+            .session-card-grid.compact {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* Student Detail Modal Styles */
-        .student-modal {
+        .connection-status {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10001;
-            backdrop-filter: blur(4px);
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .student-modal-content {
-            background: white;
+            top: 20px;
+            left: 20px;
+            padding: 8px 15px;
             border-radius: 20px;
-            padding: 35px;
-            max-width: 650px;
-            width: 90%;
-            max-height: 85vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .student-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .student-modal-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .student-modal-title h2 {
-            color: #2d3748;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin: 0;
-        }
-
-        .student-avatar {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-
-        .student-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .student-info-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            z-index: 1000;
             transition: all 0.3s ease;
         }
 
-        .student-info-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        .connection-status.connected {
+            background: #c6f6d5;
+            color: #22543d;
         }
 
-        .student-info-card h4 {
-            color: #4a5568;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .connection-status.error {
+            background: #fed7d7;
+            color: #742a2a;
         }
 
-        .student-info-value {
-            color: #2d3748;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 8px;
+        .connection-status.loading {
+            background: #feebc8;
+            color: #7c2d12;
         }
 
-        .student-info-meta {
-            color: #718096;
-            font-size: 0.875rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .debug-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
             color: white;
-            border: none;
-            padding: 12px 20px;
+            padding: 15px;
             border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
-        }
-
-        .action-btn:hover {
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        .action-btn.secondary {
-            background: white;
-            color: #667eea;
+            font-family: monospace;
+            font-size: 12px;
+            max-width: 400px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
             border: 2px solid #667eea;
         }
 
-        .action-btn.secondary:hover {
-            background: #667eea;
+        .debug-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #4a5568;
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
 
-        .additional-details-section {
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 2px solid #e2e8f0;
-        }
-
-        .additional-details-title {
-            color: #4a5568;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .additional-details-content {
-            background: #f8fafc;
-            border: 2px dashed #cbd5e0;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            color: #718096;
-            font-style: italic;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .debug-toggle:hover {
+            opacity: 1;
         }
 
         @media (max-width: 768px) {
+            .login-container {
+                padding: 30px 25px;
+            }
+
+            .login-header h1 {
+                font-size: 2rem;
+            }
+
             .header-buttons {
                 position: relative;
                 top: auto;
@@ -896,784 +927,1312 @@
                 justify-content: center;
             }
 
-            .session-detail-row {
-                grid-template-columns: 1fr;
+            .header-btn {
+                font-size: 12px;
+                padding: 6px 12px;
             }
 
-            .student-info-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 15px;
             }
 
-            .action-buttons {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .connection-status {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+                display: inline-block;
+            }
+
+            .search-section-header {
                 flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
             }
+        }
+
+        /* Notification styles for scheduling button feedback */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #48bb78;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            z-index: 10001;
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #e53e3e;
+            box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
         }
     </style>
 </head>
 <body>
+    <!-- Connection Status Indicator -->
+    <div id="connectionStatus" class="connection-status loading">🔄 Connecting...</div>
+    
+    <!-- Debug Toggle Button -->
+    <button id="debugToggle" class="debug-toggle" onclick="toggleDebugMode()">🛠 Debug</button>
+    
+    <!-- Debug Info (hidden by default) -->
+    <div id="debugInfo" class="debug-info"></div>
+
     <!-- Login Screen -->
-    <div class="login-screen" id="loginScreen">
+    <div id="loginScreen" class="login-screen">
         <div class="login-container">
             <div class="login-header">
                 <h1>📚 Tutoring Academy</h1>
-                <p>Welcome back! Please sign in to continue.</p>
+                <p>Enter password to access dashboard</p>
             </div>
-            <form class="login-form" id="loginForm">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Sign In</button>
-                <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
-            </form>
+            <div class="login-form">
+                <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="current-password">
+                <button id="loginBtn">Access Dashboard</button>
+                <div id="loginError" class="login-error"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Main Dashboard -->
-    <div class="container" id="dashboard" style="display: none;">
+    <!-- Main Dashboard (hidden by default) -->
+    <div id="mainDashboard" class="container" style="display: none;">
         <div class="header">
             <h1>📚 Tutoring Academy Dashboard</h1>
-            <p>Welcome back! Here's your overview for today.</p>
+            <p>Manage tutoring sessions and student appointments</p>
+            
+            <!-- Header Buttons -->
             <div class="header-buttons">
-                <a href="#" class="header-btn scheduling">📅 Schedule Session</a>
-                <a href="#" class="header-btn">⚙️ Settings</a>
-                <button class="header-btn" onclick="logout()">🚪 Logout</button>
+                <a href="#" id="schedulingBtn" class="header-btn">
+                    📅 Scheduling
+                </a>
+                <button id="logoutBtn" class="header-btn">🚪 Logout</button>
             </div>
         </div>
-
-        <div class="stats" id="statsSection">
+        <div id="statsContainer" class="stats">
             <div class="stat-card">
-                <div class="stat-number" id="totalSessions">0</div>
+                <div class="stat-number" id="uniqueTeachers">-</div>
+                <div class="stat-label">Teachers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueStudents">-</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalSessions">-</div>
                 <div class="stat-label">Total Sessions</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="attendedSessions">0</div>
-                <div class="stat-label">Attended Sessions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="cancelledSessions">0</div>
-                <div class="stat-label">Cancelled Sessions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="uniqueStudents">0</div>
-                <div class="stat-label">Unique Students</div>
+                <div class="stat-number" id="attendedSessions">-</div>
+                <div class="stat-label">Attended</div>
             </div>
         </div>
 
-        <div class="search-appointments-btn" id="searchButtonContainer">
+        <!-- Search Appointments Button -->
+        <div id="searchAppointmentsBtn" class="search-appointments-btn">
             <button onclick="showSearchSection()">🔍 Search Appointments</button>
-            <p>Find and filter your tutoring sessions</p>
+            <p>Find specific student sessions and appointment history</p>
         </div>
 
-        <div class="search-section" id="searchSection">
+        <!-- Search Section (Hidden by default) -->
+        <div id="searchSection" class="search-section">
             <div class="search-section-header">
-                <h3>Search Appointments</h3>
-                <button class="close-search-btn" onclick="hideSearchSection()">✕ Close</button>
+                <h3>🔍 Search Student Appointments</h3>
+                <button id="closeSearchBtn" class="close-search-btn" onclick="hideSearchSection()">✕ Close</button>
             </div>
-
+            
             <div class="student-search-container">
-                <label for="studentSearch">Search by Student Name:</label>
-                <input type="text" id="studentSearch" class="student-search-input" 
-                       placeholder="Type student name..." autocomplete="off">
-                <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+                <label>Search for a Student</label>
+                <input type="text" id="studentSearchInput" class="student-search-input" placeholder="Start typing a student name...">
+                <div id="autocompleteDropdown" class="autocomplete-dropdown"></div>
             </div>
-
-            <button class="advanced-toggle" onclick="toggleAdvancedFilters()">⚙️ Advanced Filters</button>
-
-            <div class="advanced-filters" id="advancedFilters">
+            
+            <button id="advancedToggle" class="advanced-toggle">⚙️ Advanced Search</button>
+            
+            <div id="advancedFilters" class="advanced-filters">
                 <div class="filter-row">
                     <div class="filter-group">
-                        <label for="dateFrom">From Date:</label>
-                        <input type="date" id="dateFrom">
-                    </div>
-                    <div class="filter-group">
-                        <label for="dateTo">To Date:</label>
-                        <input type="date" id="dateTo">
-                    </div>
-                    <div class="filter-group">
-                        <label for="statusFilter">Status:</label>
-                        <select id="statusFilter">
-                            <option value="">All</option>
-                            <option value="attended">Attended</option>
-                            <option value="cancelled">Cancelled</option>
-                            <option value="pending">Pending</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="teacherFilter">Teacher:</label>
+                        <label>Filter by Teacher</label>
                         <select id="teacherFilter">
                             <option value="">All Teachers</option>
                         </select>
                     </div>
+                    <div class="filter-group">
+                        <label>Status</label>
+                        <select id="statusFilter">
+                            <option value="">All Statuses</option>
+                            <option value="Attended">Attended</option>
+                            <option value="Cancelled">Cancelled</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Service Type</label>
+                        <select id="serviceFilter">
+                            <option value="">All Services</option>
+                            <option value="Tutoring" selected>Tutoring</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="sessions-container" id="sessionsContainer">
-            <div class="view-toggle-container">
-                <h3>Appointments</h3>
-                <div class="view-toggle">
-                    <button id="listViewBtn" class="active" onclick="switchToListView()">📋 List</button>
-                    <button id="calendarViewBtn" onclick="switchToCalendarView()">📅 Calendar</button>
-                </div>
-            </div>
-
-            <div id="listView">
-                <div id="sessionsList"></div>
-            </div>
-
-            <div id="calendarView" class="calendar-view">
-                <div class="calendar-header">
-                    <div class="calendar-nav">
-                        <button onclick="previousMonth()">‹ Previous</button>
-                        <div class="calendar-month-year" id="calendarMonthYear"></div>
-                        <button onclick="nextMonth()">Next ›</button>
-                    </div>
-                </div>
-                <div class="calendar-grid" id="calendarGrid"></div>
-                <div class="calendar-legend">
-                    <div class="legend-item">
-                        <div class="legend-color attended"></div>
-                        <span>Attended</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color cancelled"></div>
-                        <span>Cancelled</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color pending"></div>
-                        <span>Pending</span>
-                    </div>
+        <div class="sessions-container">
+            <div id="sessionsContainer">
+                <div class="no-sessions">
+                    <h3>Welcome to your dashboard</h3>
+                    <p>Use the "Search Appointments" button above to find specific student sessions</p>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample data
-        const sampleSessions = [
+        // Authentication
+        const DASHBOARD_PASSWORD = "1234";
+        let isAuthenticated = false;
+        let sessionsData = [];
+        let isLoading = false;
+        let searchSectionVisible = false;
+        let currentView = 'list'; // 'list' or 'calendar'
+        let currentStudentSessions = [];
+        let currentStudentName = '';
+        let currentCalendarDate = new Date();
+        let selectedAutocompleteIndex = -1;
+
+        // Google Sheets Configuration - UPDATED
+        const SHEET_ID = '1SEKrq9CesJqTDmTS5KgTi6VVDuaL7109aFIm4UGFL5A';
+        const SHEET_NAME = 'Main';
+        const API_KEY = 'AIzaSyD6jMa-tKlVg62gcOzt4mj4CRUwbTXxMyo';
+        
+        // Sample data (fallback)
+        const sampleData = [
             {
-                id: 1,
-                student: "Alex Johnson",
-                teacher: "Ms. Smith",
-                date: "2024-12-15",
-                time: "10:00 AM",
-                subject: "Mathematics",
-                status: "attended",
-                duration: "60 minutes",
-                notes: "Great progress on quadratic equations. Alex is showing excellent understanding of factoring methods."
+                student: "Elise Wharton",
+                teacher: "Tabatha Brabham-Johnson",
+                serviceName: "Tutoring",
+                status: "Attended",
+                fromTime: "4:00:00 PM",
+                toTime: "5:00:00 PM",
+                date: "8/13/2025",
+                sharedNotes1: "Great progress this session!",
+                sharedNotes2: "Homework: Practice problems 1-15",
+                internalNotes1: "Student is improving",
+                internalNotes2: "Consider advanced topics next"
             },
             {
-                id: 2,
-                student: "Emma Davis",
-                teacher: "Mr. Wilson",
-                date: "2024-12-14",
-                time: "2:00 PM",
-                subject: "Physics",
-                status: "attended",
-                duration: "45 minutes",
-                notes: "Covered Newton's laws of motion. Emma needs more practice with force diagrams."
+                student: "Marcus Johnson",
+                teacher: "Jennifer Smith", 
+                serviceName: "Tutoring",
+                status: "Attended",
+                fromTime: "3:00:00 PM",
+                toTime: "4:00:00 PM",
+                date: "8/14/2025",
+                sharedNotes1: "Completed all assignments perfectly",
+                internalNotes1: "Very dedicated student"
             },
             {
-                id: 3,
-                student: "Michael Brown",
-                teacher: "Ms. Garcia",
-                date: "2024-12-13",
-                time: "3:30 PM",
-                subject: "Chemistry",
-                status: "cancelled",
-                duration: "60 minutes",
-                notes: "Student cancelled due to illness. Will reschedule for next week."
+                student: "Sarah Chen",
+                teacher: "Michael Williams",
+                serviceName: "Tutoring", 
+                status: "Cancelled",
+                fromTime: "2:00:00 PM",
+                toTime: "3:00:00 PM",
+                date: "8/15/2025",
+                sharedNotes1: "Making steady progress",
+                internalNotes1: "Family emergency, will reschedule"
             },
             {
-                id: 4,
-                student: "Sarah Wilson",
-                teacher: "Dr. Lee",
-                date: "2024-12-16",
-                time: "11:00 AM",
-                subject: "English",
-                status: "pending",
-                duration: "90 minutes",
-                notes: "Scheduled essay writing session focusing on argumentative essays."
-            },
-            {
-                id: 5,
-                student: "David Chen",
-                teacher: "Ms. Smith",
-                date: "2024-12-12",
-                time: "1:00 PM",
-                subject: "Mathematics",
-                status: "attended",
-                duration: "60 minutes",
-                notes: "Worked on calculus derivatives. David is making steady progress."
-            },
-            {
-                id: 6,
-                student: "Alex Johnson",
-                teacher: "Ms. Smith",
-                date: "2024-12-10",
-                time: "10:00 AM",
-                subject: "Mathematics",
-                status: "attended",
-                duration: "60 minutes",
-                notes: "Review of polynomial functions and graphing techniques."
-            },
-            {
-                id: 7,
-                student: "Lisa Rodriguez",
-                teacher: "Mr. Wilson",
-                date: "2024-12-17",
-                time: "4:00 PM",
-                subject: "Physics",
-                status: "pending",
-                duration: "45 minutes",
-                notes: "Upcoming session on electromagnetic waves and their properties."
+                student: "David Rodriguez",
+                teacher: "Lisa Brown",
+                serviceName: "Test Prep",
+                status: "Attended", 
+                fromTime: "5:00:00 PM",
+                toTime: "6:00:00 PM",
+                date: "8/12/2025",
+                sharedNotes1: "Good session today",
+                internalNotes1: "Ready for practice test"
             }
         ];
 
-        let currentSessions = [...sampleSessions];
-        let filteredSessions = [...sampleSessions];
-        let currentView = 'list';
-        let currentDate = new Date();
-        let isLoggedIn = false;
-
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        // Scheduling Dashboard Configuration
+        const SCHEDULING_DASHBOARD_URL = "https://angwinacademy.github.io/availability/"; // Replace with your actual scheduling dashboard URL
+        
+        // Time formatting function
+        function formatTime(timeStr) {
+            if (!timeStr) return '';
             
-            // Simple authentication (in real app, this would be server-side)
-            if (username === 'admin' && password === 'password') {
-                login();
-            } else {
-                showLoginError();
+            // Remove seconds if present (e.g., "4:00:00 PM" becomes "4:00 PM")
+            return timeStr.replace(/:00(:00)?\s/, ' ');
+        }
+        
+        function handleSchedulingClick() {
+            updateDebugInfo('Scheduling dashboard button clicked');
+            
+            // You can customize this behavior:
+            // Option 1: Open in same tab
+            // window.location.href = SCHEDULING_DASHBOARD_URL;
+            
+            // Option 2: Open in new tab (current implementation)
+            window.open(SCHEDULING_DASHBOARD_URL, '_blank');
+            
+            // Option 3: Show a notification if URL is not set
+            if (SCHEDULING_DASHBOARD_URL !== "https://angwinacademy.github.io/availability/") {
+                showNotification("Please configure the scheduling dashboard URL in the code", "error");
+                return;
+            }
+            
+            showNotification("Opening scheduling dashboard...", "success");
+        }
+
+        function showNotification(message, type = "success") {
+            // Remove existing notification if any
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                document.body.removeChild(existingNotification);
+            }
+
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification with animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                if (document.body.contains(notification)) {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }
+            }, 3000);
+        }
+
+        function toggleDebugMode() {
+            debugMode = !debugMode;
+            document.getElementById('debugInfo').style.display = debugMode ? 'block' : 'none';
+            const toggleBtn = document.getElementById('debugToggle');
+            toggleBtn.textContent = debugMode ? '🛠 Hide Debug' : '🛠 Debug';
+            updateDebugInfo('Debug mode: ' + (debugMode ? 'ON' : 'OFF'));
+            
+            if (debugMode) {
+                // Show current status when debug is enabled
+                updateDebugInfo(`Current data source: ${sessionsData === sampleData ? 'Sample Data' : 'Google Sheets'}`);
+                updateDebugInfo(`Total sessions loaded: ${sessionsData.length}`);
+                updateDebugInfo(`Scheduling URL: ${SCHEDULING_DASHBOARD_URL}`);
+            }
+        }
+
+        // Debug mode toggle (press Ctrl+Shift+D on Windows/Linux or Cmd+Shift+D on Mac)
+        let debugMode = false;
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+                toggleDebugMode();
             }
         });
 
-        function login() {
-            isLoggedIn = true;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            initializeDashboard();
+        function updateDebugInfo(message) {
+            if (debugMode) {
+                const debugDiv = document.getElementById('debugInfo');
+                const timestamp = new Date().toLocaleTimeString();
+                debugDiv.innerHTML += `<br>[${timestamp}] ${message}`;
+                debugDiv.scrollTop = debugDiv.scrollHeight;
+            }
+        }
+
+        function updateConnectionStatus(status, message) {
+            const statusDiv = document.getElementById('connectionStatus');
+            statusDiv.className = `connection-status ${status}`;
+            
+            switch(status) {
+                case 'connected':
+                    statusDiv.innerHTML = '✅ Connected to Google Sheets';
+                    break;
+                case 'error':
+                    statusDiv.innerHTML = '⚠️ Using Sample Data';
+                    break;
+                case 'loading':
+                    statusDiv.innerHTML = '🔄 Connecting...';
+                    break;
+            }
+
+            // Hide status after 3 seconds if connected
+            if (status === 'connected') {
+                setTimeout(() => {
+                    statusDiv.style.opacity = '0.3';
+                }, 3000);
+            }
+        }
+
+        // Format teacher names (convert "Last, First" to "First Last")
+        function formatTeacherName(teacherName) {
+            if (!teacherName) return '';
+            
+            // Check if it's in "Last, First" format
+            if (teacherName.includes(',')) {
+                const parts = teacherName.split(',').map(part => part.trim());
+                if (parts.length === 2) {
+                    return `${parts[1]} ${parts[0]}`;
+                }
+            }
+            
+            return teacherName;
+        }
+
+        // Show/Hide Search Section Functions
+        function showSearchSection() {
+            updateDebugInfo('Search section opened');
+            document.getElementById('searchAppointmentsBtn').style.display = 'none';
+            document.getElementById('searchSection').classList.add('show');
+            
+            // Hide stats cards
+            document.getElementById('statsContainer').classList.add('hidden');
+            
+            searchSectionVisible = true;
+            
+            // Focus on search input
+            setTimeout(() => {
+                document.getElementById('studentSearchInput').focus();
+            }, 100);
+        }
+
+        function hideSearchSection() {
+            updateDebugInfo('Search section closed');
+            document.getElementById('searchSection').classList.remove('show');
+            document.getElementById('searchAppointmentsBtn').style.display = 'block';
+            
+            // Show stats cards
+            document.getElementById('statsContainer').classList.remove('hidden');
+            
+            searchSectionVisible = false;
+            
+            // Clear search and reset to default view
+            document.getElementById('studentSearchInput').value = '';
+            document.getElementById('autocompleteDropdown').style.display = 'none';
+            selectedAutocompleteIndex = -1;
+            
+            // Clear all filters
+            document.getElementById('teacherFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('serviceFilter').value = '';
+            
+            displayDefaultMessage();
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            updateDebugInfo('Page loaded, checking authentication');
+            
+            // Check if already authenticated
+            const savedAuth = sessionStorage.getItem('tutoring_auth');
+            if (savedAuth === 'authenticated') {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+
+            // Set up event listeners
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    attemptLogin();
+                }
+            });
+
+            // Auto-focus password input
+            setTimeout(() => {
+                const passwordInput = document.getElementById('passwordInput');
+                if (passwordInput) {
+                    passwordInput.focus();
+                }
+            }, 100);
+        });
+
+        function attemptLogin() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            updateDebugInfo(`Login attempt with password length: ${password.length}`);
+            
+            if (password === DASHBOARD_PASSWORD) {
+                sessionStorage.setItem('tutoring_auth', 'authenticated');
+                isAuthenticated = true;
+                showDashboard();
+                errorDiv.style.display = 'none';
+                updateDebugInfo('Login successful');
+            } else {
+                errorDiv.textContent = 'Incorrect password. Please try again.';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                updateDebugInfo('Login failed - incorrect password');
+                
+                // Shake animation
+                const loginContainer = document.querySelector('.login-container');
+                loginContainer.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    loginContainer.style.animation = '';
+                }, 500);
+            }
         }
 
         function logout() {
-            isLoggedIn = false;
+            sessionStorage.removeItem('tutoring_auth');
+            isAuthenticated = false;
+            showLogin();
+            document.getElementById('passwordInput').value = '';
+            updateDebugInfo('User logged out');
+        }
+
+        function showLogin() {
             document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
+            document.getElementById('mainDashboard').style.display = 'none';
         }
 
-        function showLoginError() {
-            const errorDiv = document.getElementById('loginError');
-            const loginContainer = document.querySelector('.login-container');
-            errorDiv.style.display = 'block';
-            loginContainer.style.animation = 'shake 0.5s ease-in-out';
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('mainDashboard').style.display = 'block';
+            isAuthenticated = true;
+            
+            updateDebugInfo('Dashboard shown, loading data...');
+            
+            // Load data from Google Sheets
+            loadGoogleSheetsData();
+        }
+
+        async function loadGoogleSheetsData() {
+            try {
+                updateConnectionStatus('loading');
+                updateLoadingState(true);
+                updateDebugInfo('Starting Google Sheets API call...');
+                
+                // First, let's try to make the sheet public readable
+                const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`;
+                updateDebugInfo(`API URL: ${url}`);
+                
+                console.log('Fetching data from Google Sheets...', url);
+                
+                const response = await fetch(url);
+                updateDebugInfo(`Response status: ${response.status}`);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    updateDebugInfo(`Error response: ${errorText}`);
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+                }
+                
+                const data = await response.json();
+                updateDebugInfo(`Received data with ${data.values ? data.values.length : 0} rows`);
+                console.log('Raw data from Google Sheets:', data);
+                
+                if (data.values && data.values.length > 1) {
+                    // Process the data (skip header row)
+                    const rows = data.values.slice(1);
+                    sessionsData = rows.map((row, index) => {
+                        const session = {
+                            student: row[0] || '',
+                            teacher: formatTeacherName(row[1] || ''),
+                            internalNotes1: row[2] || '',
+                            internalNotes2: row[3] || '',
+                            sharedNotes1: row[4] || '',
+                            sharedNotes2: row[5] || '',
+                            serviceName: row[6] || '',
+                            status: row[7] || '',
+                            fromTime: row[8] || '',
+                            toTime: row[9] || '',
+                            date: row[10] || '',
+                            description: row[11] || '',
+                            participantDescription: row[12] || '',
+                            lessonFlag: row[13] || '',
+                            participantIdEvent: row[14] || '',
+                            participantsId: row[15] || '',
+                            dateTime: row[16] || '',
+                            completedAt: row[17] || '',
+                            employeeId: row[18] || ''
+                        };
+                        
+                        if (index < 3) { // Log first 3 sessions for debugging
+                            updateDebugInfo(`Session ${index + 1}: ${session.student} - ${session.teacher} - ${session.status}`);
+                        }
+                        
+                        return session;
+                    });
+                    
+                    updateDebugInfo(`Successfully loaded ${sessionsData.length} sessions from Google Sheets`);
+                    console.log(`Loaded ${sessionsData.length} sessions from Google Sheets`);
+                    updateConnectionStatus('connected');
+                    updateStats();
+                    setupDashboard();
+                } else {
+                    throw new Error('No data found in the sheet or empty response');
+                }
+                
+            } catch (error) {
+                updateDebugInfo(`Error loading Google Sheets: ${error.message}`);
+                console.error('Error loading Google Sheets data:', error);
+                
+                // Fall back to sample data
+                console.log('Using sample data as fallback');
+                updateDebugInfo('Falling back to sample data');
+                sessionsData = sampleData;
+                updateConnectionStatus('error');
+                updateStats();
+                setupDashboard();
+                
+                // Show detailed error in debug mode
+                if (debugMode) {
+                    showErrorMessage(`Google Sheets Error: ${error.message}. Using sample data. Check debug panel for details.`);
+                } else {
+                    showErrorMessage('Connected to sample data. Press Cmd+Shift+D (Mac) or Ctrl+Shift+D (PC) for debug info.');
+                }
+                
+            } finally {
+                updateLoadingState(false);
+            }
+        }
+
+        function updateLoadingState(loading) {
+            isLoading = loading;
+            const container = document.getElementById('sessionsContainer');
+            
+            if (loading) {
+                container.innerHTML = `
+                    <div class="no-sessions">
+                        <h3>🔄 Loading your data...</h3>
+                        <p>Connecting to Google Sheets</p>
+                    </div>
+                `;
+            }
+        }
+
+        function showErrorMessage(message) {
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: #fed7d7;
+                color: #742a2a;
+                padding: 15px;
+                border-radius: 8px;
+                border: 1px solid #feb2b2;
+                max-width: 350px;
+                z-index: 10000;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                cursor: pointer;
+            `;
+            notification.innerHTML = `
+                <strong>⚠️ Connection Notice</strong><br>
+                ${message}<br>
+                <small style="opacity: 0.8;">Click to dismiss</small>
+            `;
+            
+            notification.onclick = () => document.body.removeChild(notification);
+            document.body.appendChild(notification);
+            
+            // Remove after 8 seconds
             setTimeout(() => {
-                loginContainer.style.animation = '';
-            }, 500);
-        }
-
-        function initializeDashboard() {
-            updateStats();
-            populateTeacherFilter();
-            renderSessions();
-            setupSearchFunctionality();
+                if (document.body.contains(notification)) {
+                    document.body.removeChild(notification);
+                }
+            }, 8000);
         }
 
         function updateStats() {
-            const totalSessions = currentSessions.length;
-            const attendedSessions = currentSessions.filter(s => s.status === 'attended').length;
-            const cancelledSessions = currentSessions.filter(s => s.status === 'cancelled').length;
-            const uniqueStudents = [...new Set(currentSessions.map(s => s.student))].length;
+            const totalSessions = sessionsData.length;
+            const attendedSessions = sessionsData.filter(s => s.status === 'Attended').length;
+            const uniqueStudents = new Set(sessionsData.map(s => s.student).filter(s => s)).size;
+            const uniqueTeachers = new Set(sessionsData.map(s => s.teacher).filter(t => t)).size;
 
             document.getElementById('totalSessions').textContent = totalSessions;
             document.getElementById('attendedSessions').textContent = attendedSessions;
-            document.getElementById('cancelledSessions').textContent = cancelledSessions;
             document.getElementById('uniqueStudents').textContent = uniqueStudents;
-        }
+            document.getElementById('uniqueTeachers').textContent = uniqueTeachers;
 
-        function populateTeacherFilter() {
-            const teachers = [...new Set(currentSessions.map(s => s.teacher))];
-            const teacherFilter = document.getElementById('teacherFilter');
-            teacherFilter.innerHTML = '<option value="">All Teachers</option>';
+            updateDebugInfo(`Stats updated: ${totalSessions} sessions, ${uniqueStudents} students, ${uniqueTeachers} teachers`);
+            
+            // Populate teacher filter
+            const teacherSelect = document.getElementById('teacherFilter');
+            teacherSelect.innerHTML = '<option value="">All Teachers</option>';
+            const teachers = [...new Set(sessionsData.map(s => s.teacher).filter(t => t))].sort();
             teachers.forEach(teacher => {
                 const option = document.createElement('option');
                 option.value = teacher;
                 option.textContent = teacher;
-                teacherFilter.appendChild(option);
+                teacherSelect.appendChild(option);
             });
         }
 
-        function showSearchSection() {
-            document.getElementById('searchButtonContainer').style.display = 'none';
-            document.getElementById('searchSection').classList.add('show');
-            document.getElementById('statsSection').classList.add('hidden');
+        function setupDashboard() {
+            updateDebugInfo('Setting up dashboard event listeners');
+            
+            // Set up logout button
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            
+            // Set up scheduling button
+            document.getElementById('schedulingBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                handleSchedulingClick();
+            });
+            
+            // Set up search functionality  
+            const studentInput = document.getElementById('studentSearchInput');
+            if (studentInput) {
+                studentInput.removeEventListener('input', handleStudentSearch);
+                studentInput.removeEventListener('keydown', handleStudentKeydown);
+                studentInput.addEventListener('input', handleStudentSearch);
+                studentInput.addEventListener('keydown', handleStudentKeydown);
+            }
+            
+            // Set up advanced toggle
+            const advancedToggle = document.getElementById('advancedToggle');
+            if (advancedToggle) {
+                advancedToggle.removeEventListener('click', toggleAdvancedFilters);
+                advancedToggle.addEventListener('click', toggleAdvancedFilters);
+            }
+
+            // Set up filter change listeners
+            document.getElementById('teacherFilter').addEventListener('change', handleAdvancedSearch);
+            document.getElementById('statusFilter').addEventListener('change', handleAdvancedSearch);
+            document.getElementById('serviceFilter').addEventListener('change', handleAdvancedSearch);
+
+            // Close autocomplete when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.student-search-container')) {
+                    document.getElementById('autocompleteDropdown').style.display = 'none';
+                    selectedAutocompleteIndex = -1;
+                }
+            });
+
+            // Close modal when clicking outside
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('session-modal')) {
+                    closeSessionModal();
+                }
+            });
         }
 
-        function hideSearchSection() {
-            document.getElementById('searchButtonContainer').style.display = 'block';
-            document.getElementById('searchSection').classList.remove('show');
-            document.getElementById('statsSection').classList.remove('hidden');
-            clearFilters();
+        function handleStudentKeydown(e) {
+            const dropdown = document.getElementById('autocompleteDropdown');
+            const items = dropdown.querySelectorAll('.autocomplete-item');
+            
+            if (dropdown.style.display === 'none' || items.length === 0) {
+                return;
+            }
+            
+            switch(e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    selectedAutocompleteIndex = Math.min(selectedAutocompleteIndex + 1, items.length - 1);
+                    updateAutocompleteHighlight(items);
+                    break;
+                    
+                case 'ArrowUp':
+                    e.preventDefault();
+                    selectedAutocompleteIndex = Math.max(selectedAutocompleteIndex - 1, -1);
+                    updateAutocompleteHighlight(items);
+                    break;
+                    
+                case 'Enter':
+                    e.preventDefault();
+                    if (selectedAutocompleteIndex >= 0 && selectedAutocompleteIndex < items.length) {
+                        const selectedItem = items[selectedAutocompleteIndex];
+                        const studentName = selectedItem.textContent;
+                        selectStudent(studentName);
+                    }
+                    break;
+                    
+                case 'Escape':
+                    dropdown.style.display = 'none';
+                    selectedAutocompleteIndex = -1;
+                    break;
+            }
+        }
+
+        function updateAutocompleteHighlight(items) {
+            items.forEach((item, index) => {
+                if (index === selectedAutocompleteIndex) {
+                    item.classList.add('highlighted');
+                } else {
+                    item.classList.remove('highlighted');
+                }
+            });
         }
 
         function toggleAdvancedFilters() {
-            const advancedFilters = document.getElementById('advancedFilters');
-            advancedFilters.classList.toggle('show');
+            const filters = document.getElementById('advancedFilters');
+            filters.classList.toggle('show');
+            updateDebugInfo(`Advanced filters toggled: ${filters.classList.contains('show') ? 'shown' : 'hidden'}`);
         }
 
-        function clearFilters() {
-            document.getElementById('studentSearch').value = '';
-            document.getElementById('dateFrom').value = '';
-            document.getElementById('dateTo').value = '';
-            document.getElementById('statusFilter').value = '';
-            document.getElementById('teacherFilter').value = '';
-            filteredSessions = [...currentSessions];
-            renderSessions();
-        }
-
-        function setupSearchFunctionality() {
-            const searchInput = document.getElementById('studentSearch');
-            const dropdown = document.getElementById('autocompleteDropdown');
-            let highlightedIndex = -1;
-
-            searchInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase();
-                if (query.length === 0) {
-                    dropdown.style.display = 'none';
-                    filteredSessions = [...currentSessions];
-                    renderSessions();
-                    return;
-                }
-
-                const students = [...new Set(currentSessions.map(s => s.student))];
-                const matches = students.filter(student => 
-                    student.toLowerCase().includes(query)
-                );
-
-                if (matches.length > 0) {
-                    dropdown.innerHTML = '';
-                    matches.forEach((student, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'autocomplete-item';
-                        item.textContent = student;
-                        item.addEventListener('click', () => selectStudent(student));
-                        dropdown.appendChild(item);
-                    });
-                    dropdown.style.display = 'block';
-                } else {
-                    dropdown.style.display = 'none';
-                }
-
-                filterSessions();
-            });
-
-            searchInput.addEventListener('keydown', function(e) {
-                const items = dropdown.querySelectorAll('.autocomplete-item');
-                if (e.key === 'ArrowDown') {
-                    e.preventDefault();
-                    highlightedIndex = Math.min(highlightedIndex + 1, items.length - 1);
-                    updateHighlight(items);
-                } else if (e.key === 'ArrowUp') {
-                    e.preventDefault();
-                    highlightedIndex = Math.max(highlightedIndex - 1, -1);
-                    updateHighlight(items);
-                } else if (e.key === 'Enter' && highlightedIndex >= 0) {
-                    e.preventDefault();
-                    selectStudent(items[highlightedIndex].textContent);
-                } else if (e.key === 'Escape') {
-                    dropdown.style.display = 'none';
-                    highlightedIndex = -1;
-                }
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
-                    dropdown.style.display = 'none';
-                    highlightedIndex = -1;
-                }
-            });
-
-            // Advanced filter listeners
-            document.getElementById('dateFrom').addEventListener('change', filterSessions);
-            document.getElementById('dateTo').addEventListener('change', filterSessions);
-            document.getElementById('statusFilter').addEventListener('change', filterSessions);
-            document.getElementById('teacherFilter').addEventListener('change', filterSessions);
-        }
-
-        function updateHighlight(items) {
-            items.forEach((item, index) => {
-                item.classList.toggle('highlighted', index === highlightedIndex);
-            });
-        }
-
-        function selectStudent(studentName) {
-            document.getElementById('studentSearch').value = studentName;
-            document.getElementById('autocompleteDropdown').style.display = 'none';
-            filterSessions();
-        }
-
-        function filterSessions() {
-            const studentQuery = document.getElementById('studentSearch').value.toLowerCase();
-            const dateFrom = document.getElementById('dateFrom').value;
-            const dateTo = document.getElementById('dateTo').value;
-            const statusFilter = document.getElementById('statusFilter').value;
+        function handleAdvancedSearch() {
             const teacherFilter = document.getElementById('teacherFilter').value;
-
-            filteredSessions = currentSessions.filter(session => {
-                const matchesStudent = !studentQuery || session.student.toLowerCase().includes(studentQuery);
-                const matchesDateFrom = !dateFrom || new Date(session.date) >= new Date(dateFrom);
-                const matchesDateTo = !dateTo || new Date(session.date) <= new Date(dateTo);
-                const matchesStatus = !statusFilter || session.status === statusFilter;
-                const matchesTeacher = !teacherFilter || session.teacher === teacherFilter;
-
-                return matchesStudent && matchesDateFrom && matchesDateTo && matchesStatus && matchesTeacher;
-            });
-
-            renderSessions();
-        }
-
-        function renderSessions() {
-            if (currentView === 'list') {
-                renderListView();
-            } else {
-                renderCalendarView();
-            }
-        }
-
-        function renderListView() {
-            const sessionsList = document.getElementById('sessionsList');
+            const statusFilter = document.getElementById('statusFilter').value;
+            const serviceFilter = document.getElementById('serviceFilter').value;
             
-            if (filteredSessions.length === 0) {
-                sessionsList.innerHTML = '<div class="no-sessions">No sessions found matching your criteria.</div>';
+            updateDebugInfo(`Advanced search - Teacher: ${teacherFilter}, Status: ${statusFilter}, Service: ${serviceFilter}`);
+            
+            // Apply filters
+            let filteredSessions = sessionsData;
+            
+            if (teacherFilter) {
+                filteredSessions = filteredSessions.filter(session => session.teacher === teacherFilter);
+            }
+            
+            if (statusFilter) {
+                filteredSessions = filteredSessions.filter(session => session.status === statusFilter);
+            }
+            
+            if (serviceFilter) {
+                filteredSessions = filteredSessions.filter(session => session.serviceName === serviceFilter);
+            }
+            
+            // Clear student search when using advanced filters
+            document.getElementById('studentSearchInput').value = '';
+            
+            // Store current data for view switching
+            currentStudentSessions = filteredSessions;
+            currentStudentName = getFilterDescription(teacherFilter, statusFilter, serviceFilter);
+            
+            displayFilteredSessions(currentStudentName, filteredSessions);
+        }
+
+        function getFilterDescription(teacher, status, service) {
+            const filters = [];
+            if (teacher) filters.push(`Teacher: ${teacher}`);
+            if (status) filters.push(`Status: ${status}`);
+            if (service) filters.push(`Service: ${service}`);
+            
+            return filters.length > 0 ? filters.join(', ') : 'All Sessions';
+        }
+
+        function handleStudentSearch() {
+            const searchTerm = document.getElementById('studentSearchInput').value.toLowerCase();
+            const dropdown = document.getElementById('autocompleteDropdown');
+            
+            updateDebugInfo(`Search term: "${searchTerm}"`);
+            selectedAutocompleteIndex = -1;
+            
+            if (searchTerm.length < 1) {
+                dropdown.style.display = 'none';
+                // Reset to default state
+                displaySearchMessage();
                 return;
             }
 
-            sessionsList.innerHTML = filteredSessions.map(session => `
-                <div class="session-card" onclick="openSessionModal(${session.id})">
-                    <div class="session-card-grid">
-                        <div>
-                            <div class="session-detail-label">Student</div>
-                            <div class="session-detail-value">
-                                <span class="clickable-student" onclick="event.stopPropagation(); openStudentModal('${escapeHtml(session.student)}')">${escapeHtml(session.student)}</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="session-detail-label">Teacher</div>
-                            <div class="session-detail-value">${escapeHtml(session.teacher)}</div>
-                        </div>
-                        <div>
-                            <div class="session-detail-label">Date</div>
-                            <div class="session-detail-value">${formatDate(session.date)}</div>
-                        </div>
-                        <div>
-                            <div class="session-detail-label">Time</div>
-                            <div class="session-detail-value">${session.time}</div>
-                        </div>
-                        <div>
-                            <div class="session-detail-label">Subject</div>
-                            <div class="session-detail-value">${escapeHtml(session.subject)}</div>
-                        </div>
-                        <div>
-                            <div class="session-detail-label">Status</div>
-                            <div class="session-detail-value" style="color: ${getStatusColor(session.status)}">${capitalize(session.status)}</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
+            const students = [...new Set(sessionsData.map(s => s.student).filter(s => s))];
+            const matchingStudents = students.filter(student => 
+                student.toLowerCase().includes(searchTerm)
+            );
 
-        function renderCalendarView() {
-            const calendarGrid = document.getElementById('calendarGrid');
-            const monthYear = document.getElementById('calendarMonthYear');
-            
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            monthYear.textContent = currentDate.toLocaleDateString('en-US', { 
-                month: 'long', 
-                year: 'numeric' 
-            });
+            updateDebugInfo(`Found ${matchingStudents.length} matching students`);
 
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startDate = new Date(firstDay);
-            startDate.setDate(startDate.getDate() - firstDay.getDay());
-
-            const endDate = new Date(lastDay);
-            endDate.setDate(endDate.getDate() + (6 - lastDay.getDay()));
-
-            let calendarHTML = '';
-            
-            // Header row
-            const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-            dayNames.forEach(day => {
-                calendarHTML += `<div class="calendar-header-cell">${day}</div>`;
-            });
-
-            // Calendar days
-            const currentDateObj = new Date(startDate);
-            while (currentDateObj <= endDate) {
-                const dateStr = currentDateObj.toISOString().split('T')[0];
-                const isCurrentMonth = currentDateObj.getMonth() === month;
-                const isToday = dateStr === new Date().toISOString().split('T')[0];
-                
-                const dayClasses = ['calendar-cell'];
-                if (!isCurrentMonth) dayClasses.push('other-month');
-                if (isToday) dayClasses.push('today');
-
-                const sessionsForDay = filteredSessions.filter(session => session.date === dateStr);
-                
-                calendarHTML += `
-                    <div class="${dayClasses.join(' ')}">
-                        <div class="calendar-date">${currentDateObj.getDate()}</div>
-                        ${sessionsForDay.map(session => `
-                            <div class="calendar-session ${session.status}" 
-                                 onclick="openSessionModal(${session.id})"
-                                 onmouseover="showTooltip(event, ${session.id})"
-                                 onmouseout="hideTooltip()">
-                                ${session.time} - <span class="clickable-student" onclick="event.stopPropagation(); openStudentModal('${escapeHtml(session.student)}')">${escapeHtml(session.student)}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-                
-                currentDateObj.setDate(currentDateObj.getDate() + 1);
+            if (matchingStudents.length > 0) {
+                dropdown.innerHTML = matchingStudents.slice(0, 10).map(student => 
+                    `<div class="autocomplete-item" onclick="selectStudent('${student.replace(/'/g, "\\'")}')">${student}</div>`
+                ).join('');
+                dropdown.style.display = 'block';
+            } else {
+                dropdown.style.display = 'none';
             }
-
-            calendarGrid.innerHTML = calendarHTML;
         }
 
-        function previousMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            renderCalendarView();
+        function selectStudent(studentName) {
+            updateDebugInfo(`Student selected: ${studentName}`);
+            document.getElementById('studentSearchInput').value = studentName;
+            document.getElementById('autocompleteDropdown').style.display = 'none';
+            selectedAutocompleteIndex = -1;
+            
+            // Clear advanced filters when selecting a student
+            document.getElementById('teacherFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('serviceFilter').value = '';
+            
+            // Show student sessions
+            const studentSessions = sessionsData.filter(s => s.student === studentName);
+            updateDebugInfo(`Found ${studentSessions.length} sessions for ${studentName}`);
+            
+            // Store current data for view switching
+            currentStudentSessions = studentSessions;
+            currentStudentName = studentName;
+            
+            displayStudentSessions(studentName, studentSessions);
         }
 
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            renderCalendarView();
-        }
-
-        function switchToListView() {
-            currentView = 'list';
-            document.getElementById('listViewBtn').classList.add('active');
-            document.getElementById('calendarViewBtn').classList.remove('active');
-            document.getElementById('listView').style.display = 'block';
-            document.getElementById('calendarView').classList.remove('show');
-            renderListView();
-        }
-
-        function switchToCalendarView() {
-            currentView = 'calendar';
-            document.getElementById('calendarViewBtn').classList.add('active');
-            document.getElementById('listViewBtn').classList.remove('active');
-            document.getElementById('listView').style.display = 'none';
-            document.getElementById('calendarView').classList.add('show');
-            renderCalendarView();
-        }
-
-        function openSessionModal(sessionId) {
-            const session = currentSessions.find(s => s.id === sessionId);
-            if (!session) return;
-
+        // Session Modal Functions
+        function showSessionModal(session) {
+            updateDebugInfo(`Opening modal for session: ${session.student} - ${session.teacher}`);
+            
             const modal = document.createElement('div');
             modal.className = 'session-modal';
             modal.innerHTML = `
                 <div class="session-modal-content">
                     <div class="session-modal-header">
-                        <h3>Session Details</h3>
-                        <button class="close-modal-btn" onclick="closeModal(this)">✕</button>
+                        <h3>📅 Session Details</h3>
+                        <button class="close-modal-btn" onclick="closeSessionModal()">✕ Close</button>
                     </div>
                     
                     <div class="session-detail-row">
                         <div class="session-detail-item">
                             <div class="session-detail-label">Student</div>
-                            <div class="session-detail-value">
-                                <span class="clickable-student" onclick="openStudentModal('${escapeHtml(session.student)}')">${escapeHtml(session.student)}</span>
-                            </div>
+                            <div class="session-detail-value">${session.student}</div>
                         </div>
                         <div class="session-detail-item">
                             <div class="session-detail-label">Teacher</div>
-                            <div class="session-detail-value">${escapeHtml(session.teacher)}</div>
+                            <div class="session-detail-value">${session.teacher}</div>
                         </div>
                     </div>
                     
                     <div class="session-detail-row">
                         <div class="session-detail-item">
                             <div class="session-detail-label">Date</div>
-                            <div class="session-detail-value">${formatDate(session.date)}</div>
+                            <div class="session-detail-value">${session.date}</div>
                         </div>
                         <div class="session-detail-item">
                             <div class="session-detail-label">Time</div>
-                            <div class="session-detail-value">${session.time}</div>
+                            <div class="session-detail-value">${formatTime(session.fromTime)} - ${formatTime(session.toTime)}</div>
                         </div>
                     </div>
                     
                     <div class="session-detail-row">
                         <div class="session-detail-item">
-                            <div class="session-detail-label">Subject</div>
-                            <div class="session-detail-value">${escapeHtml(session.subject)}</div>
+                            <div class="session-detail-label">Service</div>
+                            <div class="session-detail-value">${session.serviceName || 'Tutoring'}</div>
                         </div>
-                        <div class="session-detail-item">
-                            <div class="session-detail-label">Duration</div>
-                            <div class="session-detail-value">${session.duration}</div>
-                        </div>
-                    </div>
-                    
-                    <div class="session-detail-row single">
                         <div class="session-detail-item">
                             <div class="session-detail-label">Status</div>
-                            <div class="session-detail-value" style="color: ${getStatusColor(session.status)}">${capitalize(session.status)}</div>
+                            <div class="session-detail-value">
+                                <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; background: ${getStatusColor(session.status)};">
+                                    ${session.status}
+                                </span>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="session-notes-section">
-                        <div class="session-notes-title">Session Notes</div>
+                        <div class="session-notes-title">📝 Shared Notes</div>
                         <div class="session-notes-content">
-                            ${session.notes ? `<p>${escapeHtml(session.notes)}</p>` : '<p class="session-notes-empty">No notes available for this session.</p>'}
+                            ${(session.sharedNotes1 || session.sharedNotes2) ? 
+                                `${session.sharedNotes1 ? `<p>${session.sharedNotes1}</p>` : ''}
+                                 ${session.sharedNotes2 ? `<p>${session.sharedNotes2}</p>` : ''}` 
+                                : '<div class="session-notes-empty">No shared notes for this session</div>'}
+                        </div>
+                    </div>
+                    
+                    <div class="session-notes-section">
+                        <div class="session-notes-title">🔒 Internal Notes</div>
+                        <div class="session-notes-content">
+                            ${(session.internalNotes1 || session.internalNotes2) ? 
+                                `${session.internalNotes1 ? `<p>${session.internalNotes1}</p>` : ''}
+                                 ${session.internalNotes2 ? `<p>${session.internalNotes2}</p>` : ''}` 
+                                : '<div class="session-notes-empty">No internal notes for this session</div>'}
                         </div>
                     </div>
                 </div>
             `;
-
+            
             document.body.appendChild(modal);
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeModal(modal.querySelector('.close-modal-btn'));
-            });
         }
 
-        function openStudentModal(studentName) {
-            console.log('Opening student modal for:', studentName);
-            
-            const studentSessions = currentSessions.filter(s => s.student === studentName);
-            const lastSession = studentSessions.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
-            const totalSessions = studentSessions.length;
-            const attendedSessions = studentSessions.filter(s => s.status === 'attended').length;
-            const cancelledSessions = studentSessions.filter(s => s.status === 'cancelled').length;
-            const teachers = [...new Set(studentSessions.map(s => s.teacher))];
+        function closeSessionModal() {
+            const modal = document.querySelector('.session-modal');
+            if (modal) {
+                document.body.removeChild(modal);
+            }
+        }
 
-            const modal = document.createElement('div');
-            modal.className = 'student-modal';
-            modal.innerHTML = `
-                <div class="student-modal-content">
-                    <div class="student-modal-header">
-                        <div class="student-modal-title">
-                            <div class="student-avatar">${getInitials(studentName)}</div>
-                            <h2>${escapeHtml(studentName)}</h2>
-                        </div>
-                        <button class="close-modal-btn" onclick="closeModal(this)">✕</button>
+        // View switching functions
+        function switchView(view) {
+            currentView = view;
+            updateDebugInfo(`Switched to ${view} view`);
+            
+            // Update button states
+            document.querySelectorAll('.view-toggle button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[onclick="switchView('${view}')"]`).classList.add('active');
+            
+            // Show/hide appropriate views
+            const listView = document.getElementById('listView');
+            const calendarView = document.getElementById('calendarView');
+            
+            if (view === 'list') {
+                listView.style.display = 'block';
+                calendarView.classList.remove('show');
+            } else {
+                listView.style.display = 'none';
+                calendarView.classList.add('show');
+                renderCalendar();
+            }
+        }
+
+        function renderCalendar() {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthYearDisplay = document.getElementById('monthYearDisplay');
+            
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+            
+            // Update month/year display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            monthYearDisplay.textContent = `${monthNames[month]} ${year}`;
+            
+            // Clear existing content
+            calendarGrid.innerHTML = '';
+            
+            // Add day headers
+            const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            dayHeaders.forEach(day => {
+                const headerCell = document.createElement('div');
+                headerCell.className = 'calendar-header-cell';
+                headerCell.textContent = day;
+                calendarGrid.appendChild(headerCell);
+            });
+            
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+            
+            // Add empty cells for days before month starts
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const prevMonthDate = new Date(year, month, -firstDayOfWeek + i + 1);
+                const emptyCell = createCalendarCell(prevMonthDate, true);
+                calendarGrid.appendChild(emptyCell);
+            }
+            
+            // Add cells for each day of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const currentDate = new Date(year, month, day);
+                const cell = createCalendarCell(currentDate, false);
+                calendarGrid.appendChild(cell);
+            }
+            
+            // Fill remaining cells
+            const totalCells = calendarGrid.children.length - 7; // Subtract header row
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days
+            for (let i = 1; i <= remainingCells; i++) {
+                const nextMonthDate = new Date(year, month + 1, i);
+                const cell = createCalendarCell(nextMonthDate, true);
+                calendarGrid.appendChild(cell);
+            }
+        }
+
+        function createCalendarCell(date, isOtherMonth) {
+            const cell = document.createElement('div');
+            cell.className = 'calendar-cell';
+            if (isOtherMonth) cell.classList.add('other-month');
+            
+            // Check if this is today
+            const today = new Date();
+            if (date.toDateString() === today.toDateString()) {
+                cell.classList.add('today');
+            }
+            
+            // Add date number
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'calendar-date';
+            dateDiv.textContent = date.getDate();
+            cell.appendChild(dateDiv);
+            
+            // Find sessions for this date
+            const dateString = formatDateForComparison(date);
+            const sessionsForDate = currentStudentSessions.filter(session => {
+                return formatDateForComparison(new Date(session.date)) === dateString;
+            });
+            
+            // Add sessions to the cell
+            sessionsForDate.forEach(session => {
+                const sessionDiv = document.createElement('div');
+                sessionDiv.className = 'calendar-session';
+                if (session.status.toLowerCase() === 'cancelled') {
+                    sessionDiv.classList.add('cancelled');
+                } else if (session.status.toLowerCase() === 'pending') {
+                    sessionDiv.classList.add('pending');
+                }
+                
+                // Show teacher first name and time
+                const teacherFirstName = session.teacher.split(' ')[0];
+                sessionDiv.textContent = `${formatTime(session.fromTime)} ${teacherFirstName}`;
+                
+                sessionDiv.onclick = (e) => {
+                    e.stopPropagation();
+                    showSessionModal(session);
+                };
+                
+                // Add hover tooltip
+                sessionDiv.onmouseenter = (e) => showSessionTooltip(e, session);
+                sessionDiv.onmouseleave = hideSessionTooltip;
+                
+                cell.appendChild(sessionDiv);
+            });
+            
+            return cell;
+        }
+
+        function formatDateForComparison(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        function showSessionTooltip(event, session) {
+            const tooltip = document.getElementById('sessionTooltip') || createTooltip();
+            
+            tooltip.innerHTML = `
+                <div><strong>${session.teacher}</strong></div>
+                <div>${formatTime(session.fromTime)} - ${formatTime(session.toTime)}</div>
+                <div>Status: ${session.status}</div>
+                ${session.sharedNotes1 ? `<div style="margin-top: 5px; font-size: 0.8rem;">${session.sharedNotes1}</div>` : ''}
+            `;
+            
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = rect.left + 'px';
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - 10) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function createTooltip() {
+            const tooltip = document.createElement('div');
+            tooltip.id = 'sessionTooltip';
+            tooltip.className = 'session-tooltip';
+            document.body.appendChild(tooltip);
+            return tooltip;
+        }
+
+        function hideSessionTooltip() {
+            const tooltip = document.getElementById('sessionTooltip');
+            if (tooltip) {
+                tooltip.classList.remove('show');
+            }
+        }
+
+        function navigateCalendar(direction) {
+            const currentMonth = currentCalendarDate.getMonth();
+            const currentYear = currentCalendarDate.getFullYear();
+            
+            if (direction === 'prev') {
+                currentCalendarDate = new Date(currentYear, currentMonth - 1, 1);
+            } else {
+                currentCalendarDate = new Date(currentYear, currentMonth + 1, 1);
+            }
+            
+            renderCalendar();
+        }
+
+        function goToToday() {
+            currentCalendarDate = new Date();
+            renderCalendar();
+        }
+
+        function displayDefaultMessage() {
+            const container = document.getElementById('sessionsContainer');
+            container.innerHTML = `
+                <div class="no-sessions">
+                    <h3>Welcome to your dashboard</h3>
+                    <p>Use the "Search Appointments" button above to find specific student sessions</p>
+                </div>
+            `;
+        }
+
+        function displaySearchMessage() {
+            const container = document.getElementById('sessionsContainer');
+            container.innerHTML = `
+                <div class="no-sessions">
+                    <h3>Search for a student</h3>
+                    <p>Type in a student's name above to view their session history</p>
+                </div>
+            `;
+        }
+
+        function displayStudentSessions(studentName, sessions) {
+            displayFilteredSessions(studentName, sessions, true);
+        }
+
+        function displayFilteredSessions(filterName, sessions, isStudent = false) {
+            const container = document.getElementById('sessionsContainer');
+            
+            if (sessions.length === 0) {
+                const searchType = isStudent ? 'student' : 'filter criteria';
+                const searchValue = isStudent ? filterName : 'these filters';
+                container.innerHTML = `
+                    <div class="no-sessions">
+                        <h3>No sessions found</h3>
+                        <p>No sessions match ${searchValue}.</p>
                     </div>
-                    
-                    <div class="student-info-grid">
-                        <div class="student-info-card">
-                            <h4>📅 Last Session</h4>
-                            ${lastSession ? `
-                                <div class="student-info-value">${formatDate(lastSession.date)} at ${lastSession.time}</div>
-                                <div class="student-info-meta">with ${escapeHtml(lastSession.teacher)} • ${escapeHtml(lastSession.subject)}</div>
+                `;
+                return;
+            }
+
+            // Sort sessions by date (most recent first)
+            const sortedSessions = sessions.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return dateB - dateA;
+            });
+
+            const headerTitle = isStudent ? `Sessions for ${filterName}` : `Filtered Sessions: ${filterName}`;
+
+            container.innerHTML = `
+                <div class="view-toggle-container">
+                    <h2 style="color: #4a5568; margin: 0;">📋 ${headerTitle}</h2>
+                    <div class="view-toggle">
+                        <button class="active" onclick="switchView('list')">📋 List View</button>
+                        <button onclick="switchView('calendar')">📅 Calendar View</button>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 20px; padding: 15px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
+                    <strong>Total Sessions:</strong> ${sessions.length} | 
+                    <strong>Attended:</strong> ${sessions.filter(s => s.status === 'Attended').length} | 
+                    <strong>Cancelled:</strong> ${sessions.filter(s => s.status === 'Cancelled').length}
+                </div>
+
+                <!-- List View -->
+                <div id="listView">
+                    ${sortedSessions.map((session, index) => `
+                        <div class="session-card" onclick="showSessionModal(this.sessionData)" style="cursor: pointer;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <strong style="font-size: 1.1rem;">${session.teacher}</strong>
+                                <span style="padding: 4px 12px; border-radius: 20px; font-size: 0.875rem; font-weight: 500; background: ${getStatusColor(session.status)};">
+                                    ${session.status}
+                                </span>
+                            </div>
+                            <div class="session-card-grid ${isStudent ? '' : 'compact'}">
+                                ${isStudent ? '' : `
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Student</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.student}</div>
+                                </div>
+                                `}
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Date</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.date}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Time</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${formatTime(session.fromTime)} - ${formatTime(session.toTime)}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 0.75rem; color: #718096; text-transform: uppercase; font-weight: 600;">Service</div>
+                                    <div style="color: #2d3748; font-weight: 500;">${session.serviceName || 'Tutoring'}</div>
+                                </div>
+                            </div>
+                            ${(session.sharedNotes1 || session.sharedNotes2) ? `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">📝 Shared Notes</div>
+                                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                        ${session.sharedNotes1 ? `<p style="margin-bottom: ${session.sharedNotes2 ? '10px' : '0'};">${session.sharedNotes1}</p>` : ''}
+                                        ${session.sharedNotes2 ? `<p style="margin: 0;">${session.sharedNotes2}</p>` : ''}
+                                    </div>
+                                </div>
                             ` : `
-                                <div class="student-info-value">No sessions yet</div>
-                                <div class="student-info-meta">Schedule the first session</div>
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">📝 Shared Notes</div>
+                                    <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; min-height: 60px; display: flex; align-items: center; justify-content: center; color: #a0aec0; font-style: italic;">
+                                        No shared notes for this session
+                                    </div>
+                                </div>
+                            `}
+                            ${(session.internalNotes1 || session.internalNotes2) ? `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">🔒 Internal Notes</div>
+                                    <div style="background: #fefefe; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; color: #4a5568;">
+                                        ${session.internalNotes1 ? `<p style="margin-bottom: ${session.internalNotes2 ? '10px' : '0'};">${session.internalNotes1}</p>` : ''}
+                                        ${session.internalNotes2 ? `<p style="margin: 0;">${session.internalNotes2}</p>` : ''}
+                                    </div>
+                                </div>
+                            ` : `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                    <div style="font-weight: 600; margin-bottom: 8px; color: #4a5568;">🔒 Internal Notes</div>
+                                    <div style="background: #fefefe; padding: 12px; border-radius: 8px; border: 1px solid #f1f5f9; color: #4a5568; min-height: 60px; display: flex; align-items: center; justify-content: center; color: #a0aec0; font-style: italic;">
+                                        No internal notes for this session
+                                    </div>
+                                </div>
                             `}
                         </div>
-                        
-                        <div class="student-info-card">
-                            <h4>📊 Session Stats</h4>
-                            <div class="student-info-value">${totalSessions} Total Sessions</div>
-                            <div class="student-info-meta">${attendedSessions} attended • ${cancelledSessions} cancelled</div>
+                    `).join('')}
+                </div>
+
+                <!-- Calendar View -->
+                <div id="calendarView" class="calendar-view">
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button onclick="navigateCalendar('prev')">‹ Previous</button>
+                            <button onclick="goToToday()">Today</button>
+                            <button onclick="navigateCalendar('next')">Next ›</button>
                         </div>
-                        
-                        <div class="student-info-card">
-                            <h4>👨‍🏫 Teachers</h4>
-                            <div class="student-info-value">${teachers.length} Teacher${teachers.length !== 1 ? 's' : ''}</div>
-                            <div class="student-info-meta">${teachers.join(', ')}</div>
-                        </div>
+                        <div id="monthYearDisplay" class="calendar-month-year"></div>
+                        <div></div> <!-- Spacer for flex layout -->
                     </div>
                     
-                    <div class="action-buttons">
-                        ${lastSession ? `<button class="action-btn" onclick="closeModal(this); setTimeout(() => openSessionModal(${lastSession.id}), 100);">📄 View Last Session</button>` : ''}
-                        <button class="action-btn secondary" onclick="viewStudentHistory('${escapeHtml(studentName)}')">📋 View Session History</button>
-                    </div>
+                    <div id="calendarGrid" class="calendar-grid"></div>
                     
-                    <div class="additional-details-section">
-                        <div class="additional-details-title">📝 Additional Details</div>
-                        <div class="additional-details-content">
-                            Unique student details that shall be written about later
+                    <div class="calendar-legend">
+                        <div class="legend-item">
+                            <div class="legend-color attended"></div>
+                            <span>Attended</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cancelled"></div>
+                            <span>Cancelled</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color pending"></div>
+                            <span>Pending</span>
                         </div>
                     </div>
                 </div>
             `;
-
-            document.body.appendChild(modal);
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) closeModal(modal.querySelector('.close-modal-btn'));
-            });
-        }
-
-        function viewStudentHistory(studentName) {
-            console.log('Viewing history for student:', studentName);
             
-            // Close the student modal
-            const studentModal = document.querySelector('.student-modal');
-            if (studentModal) {
-                studentModal.remove();
-            }
-            
-            // Set the search field and filter
-            document.getElementById('studentSearch').value = studentName;
-            showSearchSection();
-            filterSessions();
-        }
-
-        function closeModal(button) {
-            const modal = button.closest('.session-modal, .student-modal');
-            if (modal) {
-                modal.remove();
-            }
-        }
-
-        function getInitials(name) {
-            return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-US', { 
-                weekday: 'short', 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric' 
+            // Attach session data to each card for the modal
+            const sessionCards = container.querySelectorAll('.session-card');
+            sessionCards.forEach((card, index) => {
+                card.sessionData = sortedSessions[index];
             });
+            
+            // Reset to list view by default
+            currentView = 'list';
         }
 
         function getStatusColor(status) {
-            switch (status) {
-                case 'attended': return '#48bb78';
-                case 'cancelled': return '#e53e3e';
-                case 'pending': return '#d69e2e';
-                default: return '#4a5568';
+            switch(status) {
+                case 'Attended':
+                    return '#c6f6d5; color: #22543d';
+                case 'Cancelled':
+                    return '#fed7d7; color: #742a2a';
+                case 'Pending':
+                    return '#feebc8; color: #7c2d12';
+                default:
+                    return '#f1f5f9; color: #4a5568';
             }
         }
 
-        function capitalize(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1);
+        // Initialize default message
+        function initializeDefaultState() {
+            displayDefaultMessage();
         }
-
-        // Initialize the dashboard when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            // Auto-login for demo purposes (remove in production)
-            setTimeout(() => {
-                document.getElementById('username').value = 'admin';
-                document.getElementById('password').value = 'password';
-                login();
-            }, 1000);
-        });
     </script>
 </body>
 </html>
