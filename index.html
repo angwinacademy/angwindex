@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -161,15 +161,14 @@
         }
 
         .header-btn.scheduling {
-            background: rgba(255, 255, 255, 0.2);
-            color: #4a5568;
-            border: 2px solid rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border-color: transparent;
         }
 
         .header-btn.scheduling:hover {
-            background: rgba(102, 126, 234, 0.1);
-            border-color: rgba(102, 126, 234, 0.5);
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
         }
 
         .stats {
@@ -912,6 +911,21 @@
     </style>
 </head>
 <body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>📚 Tutoring Academy</h1>
+                <p>Welcome back! Please sign in to continue.</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+                <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
+            </form>
+        </div>
+    </div>
 
     <!-- Main Dashboard -->
     <div class="container" id="dashboard" style="display: none;">
@@ -1045,8 +1059,7 @@
                 subject: "Mathematics",
                 status: "attended",
                 duration: "60 minutes",
-                internalNotes: "Great progress on quadratic equations. Alex is showing excellent understanding of factoring methods.",
-                externalNotes: "Alex completed all homework assignments and is ready for more advanced topics."
+                notes: "Great progress on quadratic equations. Alex is showing excellent understanding of factoring methods."
             },
             {
                 id: 2,
@@ -1057,8 +1070,7 @@
                 subject: "Physics",
                 status: "attended",
                 duration: "45 minutes",
-                internalNotes: "Covered Newton's laws of motion. Emma needs more practice with force diagrams.",
-                externalNotes: "Emma is progressing well in physics. Recommend additional practice problems for homework."
+                notes: "Covered Newton's laws of motion. Emma needs more practice with force diagrams."
             },
             {
                 id: 3,
@@ -1069,8 +1081,7 @@
                 subject: "Chemistry",
                 status: "cancelled",
                 duration: "60 minutes",
-                internalNotes: "Student cancelled due to illness. Will reschedule for next week.",
-                externalNotes: "Session was cancelled due to student illness. No makeup work assigned."
+                notes: "Student cancelled due to illness. Will reschedule for next week."
             },
             {
                 id: 4,
@@ -1081,8 +1092,7 @@
                 subject: "English",
                 status: "pending",
                 duration: "90 minutes",
-                internalNotes: "Scheduled essay writing session focusing on argumentative essays.",
-                externalNotes: "Please bring draft of argumentative essay and any research materials."
+                notes: "Scheduled essay writing session focusing on argumentative essays."
             },
             {
                 id: 5,
@@ -1093,8 +1103,7 @@
                 subject: "Mathematics",
                 status: "attended",
                 duration: "60 minutes",
-                internalNotes: "Worked on calculus derivatives. David is making steady progress.",
-                externalNotes: "David is doing well with calculus concepts. Continue with derivative practice problems."
+                notes: "Worked on calculus derivatives. David is making steady progress."
             },
             {
                 id: 6,
@@ -1105,8 +1114,7 @@
                 subject: "Mathematics",
                 status: "attended",
                 duration: "60 minutes",
-                internalNotes: "Review of polynomial functions and graphing techniques.",
-                externalNotes: "Alex showed good understanding of polynomial concepts. Ready for quadratic equations."
+                notes: "Review of polynomial functions and graphing techniques."
             },
             {
                 id: 7,
@@ -1117,8 +1125,7 @@
                 subject: "Physics",
                 status: "pending",
                 duration: "45 minutes",
-                internalNotes: "Upcoming session on electromagnetic waves and their properties.",
-                externalNotes: "Please review chapter 12 on wave properties before the next session."
+                notes: "Upcoming session on electromagnetic waves and their properties."
             }
         ];
 
@@ -1128,6 +1135,44 @@
         let currentDate = new Date();
         let isLoggedIn = false;
 
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple authentication (in real app, this would be server-side)
+            if (username === 'admin' && password === 'password') {
+                login();
+            } else {
+                showLoginError();
+            }
+        });
+
+        function login() {
+            isLoggedIn = true;
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            initializeDashboard();
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        function showLoginError() {
+            const errorDiv = document.getElementById('loginError');
+            const loginContainer = document.querySelector('.login-container');
+            errorDiv.style.display = 'block';
+            loginContainer.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                loginContainer.style.animation = '';
+            }, 500);
+        }
 
         function initializeDashboard() {
             updateStats();
@@ -1484,16 +1529,9 @@
                     </div>
                     
                     <div class="session-notes-section">
-                        <div class="session-notes-title">Internal Notes</div>
+                        <div class="session-notes-title">Session Notes</div>
                         <div class="session-notes-content">
-                            ${session.internalNotes ? `<p>${escapeHtml(session.internalNotes)}</p>` : '<p class="session-notes-empty">No internal notes available for this session.</p>'}
-                        </div>
-                    </div>
-                    
-                    <div class="session-notes-section">
-                        <div class="session-notes-title">External Notes</div>
-                        <div class="session-notes-content">
-                            ${session.externalNotes ? `<p>${escapeHtml(session.externalNotes)}</p>` : '<p class="session-notes-empty">No external notes available for this session.</p>'}
+                            ${session.notes ? `<p>${escapeHtml(session.notes)}</p>` : '<p class="session-notes-empty">No notes available for this session.</p>'}
                         </div>
                     </div>
                 </div>
@@ -1528,7 +1566,7 @@
                     </div>
                     
                     <div class="student-info-grid">
-                        <div class="student-info-card" style="cursor: pointer;" onclick="${lastSession ? `closeModal(this); setTimeout(() => openSessionModal(${lastSession.id}), 100);` : ''}">
+                        <div class="student-info-card">
                             <h4>📅 Last Session</h4>
                             ${lastSession ? `
                                 <div class="student-info-value">${formatDate(lastSession.date)} at ${lastSession.time}</div>
@@ -1539,7 +1577,7 @@
                             `}
                         </div>
                         
-                        <div class="student-info-card" style="cursor: pointer;" onclick="viewStudentHistory('${escapeHtml(studentName)}')">
+                        <div class="student-info-card">
                             <h4>📊 Session Stats</h4>
                             <div class="student-info-value">${totalSessions} Total Sessions</div>
                             <div class="student-info-meta">${attendedSessions} attended • ${cancelledSessions} cancelled</div>
@@ -1550,6 +1588,11 @@
                             <div class="student-info-value">${teachers.length} Teacher${teachers.length !== 1 ? 's' : ''}</div>
                             <div class="student-info-meta">${teachers.join(', ')}</div>
                         </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        ${lastSession ? `<button class="action-btn" onclick="closeModal(this); setTimeout(() => openSessionModal(${lastSession.id}), 100);">📄 View Last Session</button>` : ''}
+                        <button class="action-btn secondary" onclick="viewStudentHistory('${escapeHtml(studentName)}')">📋 View Session History</button>
                     </div>
                     
                     <div class="additional-details-section">
@@ -1624,7 +1667,12 @@
 
         // Initialize the dashboard when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            // Dashboard is ready, user can click "Enter Dashboard" to access
+            // Auto-login for demo purposes (remove in production)
+            setTimeout(() => {
+                document.getElementById('username').value = 'admin';
+                document.getElementById('password').value = 'password';
+                login();
+            }, 1000);
         });
     </script>
 </body>
