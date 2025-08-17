@@ -1129,7 +1129,7 @@
             window.open(SCHEDULING_DASHBOARD_URL, '_blank');
             
             // Option 3: Show a notification if URL is not set
-            if (SCHEDULING_DASHBOARD_URL === "https://angwinacademy.github.io/availability/") {
+            if (SCHEDULING_DASHBOARD_URL !== "https://angwinacademy.github.io/availability/") {
                 showNotification("Please configure the scheduling dashboard URL in the code", "error");
                 return;
             }
