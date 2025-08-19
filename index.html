@@ -161,17 +161,7 @@
             transform: translateY(-1px);
         }
 
-        .header-btn.scheduling {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            color: white;
-            border-color: transparent;
-        }
-
-        .header-btn.scheduling:hover {
-            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
-            box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
-        }
-
+   
         .logout-btn {
             position: absolute;
             top: 30px;
@@ -1014,9 +1004,7 @@
             
             <!-- Header Buttons -->
             <div class="header-buttons">
-                <a href="#" id="schedulingBtn" class="header-btn">
-                    📅 Scheduling
-                </a>
+<!--     more header buttons go here -->
                 <button id="logoutBtn" class="header-btn">🚪 Logout</button>
             </div>
         </div>
@@ -1166,9 +1154,7 @@
             }
         ];
 
-        // Scheduling Dashboard Configuration
-        const SCHEDULING_DASHBOARD_URL = "https://angwinacademy.github.io/availability/"; // Replace with your actual scheduling dashboard URL
-        
+ 
         // Time formatting function
         function formatTime(timeStr) {
             if (!timeStr) return '';
@@ -1177,24 +1163,7 @@
             return timeStr.replace(/:00(:00)?\s/, ' ');
         }
         
-        function handleSchedulingClick() {
-            updateDebugInfo('Scheduling dashboard button clicked');
-            
-            // You can customize this behavior:
-            // Option 1: Open in same tab
-            // window.location.href = SCHEDULING_DASHBOARD_URL;
-            
-            // Option 2: Open in new tab (current implementation)
-            window.open(SCHEDULING_DASHBOARD_URL, '_blank');
-            
-            // Option 3: Show a notification if URL is not set
-            if (SCHEDULING_DASHBOARD_URL !== "https://angwinacademy.github.io/availability/") {
-                showNotification("Please configure the scheduling dashboard URL in the code", "error");
-                return;
-            }
-            
-            showNotification("Opening scheduling dashboard...", "success");
-        }
+
 
         function showNotification(message, type = "success") {
             // Remove existing notification if any
@@ -1239,7 +1208,7 @@
                 // Show current status when debug is enabled
                 updateDebugInfo(`Current data source: ${sessionsData === sampleData ? 'Sample Data' : 'Google Sheets'}`);
                 updateDebugInfo(`Total sessions loaded: ${sessionsData.length}`);
-                updateDebugInfo(`Scheduling URL: ${SCHEDULING_DASHBOARD_URL}`);
+                // updateDebugInfo(`Scheduling URL: ${SCHEDULING_DASHBOARD_URL}`);
             }
         }
 
@@ -1590,12 +1559,7 @@
             // Set up logout button
             document.getElementById('logoutBtn').addEventListener('click', logout);
             
-            // Set up scheduling button
-            document.getElementById('schedulingBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                handleSchedulingClick();
-            });
-            
+    
             // Set up search functionality  
             const studentInput = document.getElementById('studentSearchInput');
             if (studentInput) {
