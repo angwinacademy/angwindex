@@ -1314,23 +1314,10 @@
 
         // Initialize when page loads
         window.addEventListener('load', function() {
-            updateDebugInfo('Page loaded, checking authentication');
-            
-            // Check if already authenticated
-            const savedAuth = sessionStorage.getItem('tutoring_auth');
-            if (savedAuth === 'authenticated') {
-                showDashboard();
-            } else {
-                showLogin();
-            }
-
-            // Set up event listeners
-            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
-            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    
-                }
-            });
+    try { sessionStorage.setItem('tutoring_auth','authenticated'); } catch(e) {}
+    if (typeof updateDebugInfo==='function') updateDebugInfo('Page loaded (auth bypass), showing dashboard');
+    if (typeof showDashboard==='function') showDashboard();
+});
 
             // Auto-focus password input
             setTimeout(() => {
