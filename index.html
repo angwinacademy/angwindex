@@ -992,16 +992,10 @@
     <div id="debugInfo" class="debug-info"></div>
 
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-screen">
-        <div class="login-container">
-            <div class="login-header">
-                <h1>📚 Tutoring Academy</h1>
-                <p>Enter password to access dashboard</p>
-            </div>
+    
             <div class="login-form">
-                <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="current-password">
-                <button id="loginBtn">Access Dashboard</button>
-                <div id="loginError" class="login-error"></div>
+                
+                
             </div>
         </div>
     </div>
@@ -1334,7 +1328,7 @@
             document.getElementById('loginBtn').addEventListener('click', attemptLogin);
             document.getElementById('passwordInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
-                    attemptLogin();
+                    
                 }
             });
 
@@ -1347,11 +1341,7 @@
             }, 100);
         });
 
-        function attemptLogin() {
-            const password = document.getElementById('passwordInput').value;
-            const errorDiv = document.getElementById('loginError');
-            
-            updateDebugInfo(`Login attempt with password length: ${password.length}`);
+        function `);
             
             if (password === DASHBOARD_PASSWORD) {
                 sessionStorage.setItem('tutoring_auth', 'authenticated');
