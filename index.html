@@ -992,10 +992,16 @@
     <div id="debugInfo" class="debug-info"></div>
 
     <!-- Login Screen -->
-    
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>📚 Tutoring Academy</h1>
+                <p>Enter password to access dashboard</p>
+            </div>
             <div class="login-form">
-                
-                
+                <input type="password" id="passwordInput" placeholder="Enter password..." autocomplete="current-password">
+                <button id="loginBtn">Access Dashboard</button>
+                <div id="loginError" class="login-error"></div>
             </div>
         </div>
     </div>
@@ -1314,10 +1320,23 @@
 
         // Initialize when page loads
         window.addEventListener('load', function() {
-    try { sessionStorage.setItem('tutoring_auth','authenticated'); } catch(e) {}
-    if (typeof updateDebugInfo==='function') updateDebugInfo('Page loaded (auth bypass), showing dashboard');
-    if (typeof showDashboard==='function') showDashboard();
-});
+            updateDebugInfo('Page loaded, checking authentication');
+            
+            // Check if already authenticated
+            const savedAuth = sessionStorage.getItem('tutoring_auth');
+            if (savedAuth === 'authenticated') {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+
+            // Set up event listeners
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    attemptLogin();
+                }
+            });
 
             // Auto-focus password input
             setTimeout(() => {
@@ -1328,7 +1347,11 @@
             }, 100);
         });
 
-        function `);
+        function attemptLogin() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            updateDebugInfo(`Login attempt with password length: ${password.length}`);
             
             if (password === DASHBOARD_PASSWORD) {
                 sessionStorage.setItem('tutoring_auth', 'authenticated');
